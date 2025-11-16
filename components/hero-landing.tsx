@@ -13,7 +13,7 @@ export default function HeroLanding() {
       <nav className="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md border-b border-slate-800 z-40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Digital Twin
+            Jhon Danver
           </div>
           <div className="hidden md:flex gap-6 items-center">
             <a href="#about" className="text-gray-300 hover:text-white transition">About</a>
