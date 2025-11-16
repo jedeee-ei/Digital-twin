@@ -35,26 +35,26 @@ export default function HeroLanding() {
                   Hi, I'm <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Jhon Danver</span>
                 </h1>
                 <p className="text-xl text-gray-300">
-                  Certified HTML and CSS Developer | Web Developer | AI Agent Enthusiast
+                  Certified HTML and CSS Developer | Web Designer | Student
                 </p>
               </div>
 
               <p className="text-lg text-gray-400 leading-relaxed max-w-lg">
-                Full Stack Developer with expertise in Next.js, React, and AI integration. I specialize in building modern web applications with MCP servers and RAG systems. Currently focused on creating intelligent digital twin solutions and exploring the future of AI-assisted development.
+                I am a passionate web designer and student who enjoys designing responsive websites and creative visual content. With expertise in HTML, CSS, and graphic design, I specialize in UI/UX design and building systems that streamline complex processes.
               </p>
 
               <div className="grid grid-cols-3 gap-4 py-6">
                 <div>
-                  <div className="text-3xl font-bold text-blue-400">10+</div>
-                  <p className="text-gray-400 text-sm">Projects</p>
+                  <div className="text-3xl font-bold text-blue-400">2</div>
+                  <p className="text-gray-400 text-sm">Years HTML/CSS</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-purple-400">5+</div>
-                  <p className="text-gray-400 text-sm">Technologies</p>
+                  <div className="text-3xl font-bold text-purple-400">3</div>
+                  <p className="text-gray-400 text-sm">Major Projects</p>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-green-400">∞</div>
-                  <p className="text-gray-400 text-sm">Learning</p>
+                  <div className="text-3xl font-bold text-green-400">2</div>
+                  <p className="text-gray-400 text-sm">Certifications</p>
                 </div>
               </div>
 
@@ -104,21 +104,21 @@ export default function HeroLanding() {
             {/* Right Side - Feature Cards */}
             <div className="space-y-4">
               <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-blue-500/50 transition">
-                <div className="text-3xl mb-3">🚀</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Full Stack Developer</h3>
-                <p className="text-gray-400">Building modern web applications with Next.js, React, and TypeScript</p>
+                <div className="text-3xl mb-3">🎨</div>
+                <h3 className="text-xl font-semibold text-white mb-2">Web Design Expert</h3>
+                <p className="text-gray-400">Certified in HTML and CSS with 2 years of expertise in responsive web design and UI/UX</p>
               </div>
 
               <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-purple-500/50 transition">
-                <div className="text-3xl mb-3">🤖</div>
-                <h3 className="text-xl font-semibold text-white mb-2">AI Integration</h3>
-                <p className="text-gray-400">Implementing MCP servers and RAG systems with Groq API</p>
+                <div className="text-3xl mb-3">🎭</div>
+                <h3 className="text-xl font-semibold text-white mb-2">Graphic Designer</h3>
+                <p className="text-gray-400">Creative visual design specializing in poster design, branding, and visual communication</p>
               </div>
 
               <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-green-500/50 transition">
-                <div className="text-3xl mb-3">💡</div>
-                <h3 className="text-xl font-semibold text-white mb-2">Problem Solver</h3>
-                <p className="text-gray-400">Creating innovative solutions with clean, maintainable code</p>
+                <div className="text-3xl mb-3">💼</div>
+                <h3 className="text-xl font-semibold text-white mb-2">System Builder</h3>
+                <p className="text-gray-400">Designing and developing comprehensive management and analytics systems</p>
               </div>
             </div>
           </div>
@@ -145,16 +145,16 @@ export default function HeroLanding() {
           </div>
 
           <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-8">
-            <h3 className="text-2xl font-semibold text-white mb-6">My Journey</h3>
+            <h3 className="text-2xl font-semibold text-white mb-4">My Journey</h3>
             <div className="space-y-4 text-gray-400">
               <p>
-                I started my journey as a web developer with a focus on creating responsive, user-friendly interfaces. Over time, I've expanded my expertise to include full-stack development, covering both frontend and backend technologies.
+                I am a student at Saint Paul University Philippines, pursuing a Bachelor of Science in Information Technology. As a Certified HTML and CSS Developer with 2 years of hands-on experience, I've developed a strong foundation in web design and responsive development.
               </p>
               <p>
-                Recently, I've been diving deep into AI integration, particularly with MCP (Model Context Protocol) servers and RAG (Retrieval-Augmented Generation) systems. This led me to create the Digital Twin project - an intelligent assistant that can answer questions about my professional background.
+                Beyond web development, I'm passionate about graphic design and visual communication. I work with tools like Figma, Adobe Photoshop, and Adobe Illustrator to create compelling visual content. I also have beginner-level experience in video editing with tools like Adobe Premiere Pro and DaVinci Resolve.
               </p>
               <p>
-                I'm passionate about exploring the intersection of AI and web development, and I'm always looking for innovative ways to solve problems and create better user experiences.
+                My goal is to become a lead UI/UX designer or front-end specialist in a creative and innovative company. I'm focused on learning modern web layout techniques, design systems, accessibility, and continuously improving my visual design skills. I believe in creating user-centric solutions that solve real-world problems.
               </p>
             </div>
           </div>
@@ -167,12 +167,12 @@ export default function HeroLanding() {
           <h2 className="text-4xl font-bold text-white mb-12 text-center">Skills & Technologies</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-8">
-              <h3 className="text-2xl font-semibold text-blue-400 mb-6">Frontend</h3>
+              <h3 className="text-2xl font-semibold text-blue-400 mb-6">Web Design</h3>
               <div className="space-y-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-300 mb-2">Frameworks & Libraries</p>
+                  <p className="text-sm font-medium text-gray-300 mb-2">Core Languages (Expert)</p>
                   <div className="flex flex-wrap gap-2">
-                    {['React', 'Next.js', 'TypeScript'].map(skill => (
+                    {['HTML', 'CSS'].map(skill => (
                       <span key={skill} className="px-3 py-1 bg-blue-500/20 border border-blue-500/50 text-blue-300 rounded-lg text-sm">
                         {skill}
                       </span>
@@ -180,19 +180,9 @@ export default function HeroLanding() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-300 mb-2">Styling</p>
+                  <p className="text-sm font-medium text-gray-300 mb-2">Specialties</p>
                   <div className="flex flex-wrap gap-2">
-                    {['Tailwind CSS', 'CSS3', 'PostCSS'].map(skill => (
-                      <span key={skill} className="px-3 py-1 bg-blue-500/20 border border-blue-500/50 text-blue-300 rounded-lg text-sm">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-300 mb-2">Core Web</p>
-                  <div className="flex flex-wrap gap-2">
-                    {['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'].map(skill => (
+                    {['UI/UX Design', 'Responsive Design', 'Web Layout', 'Color Theory', 'Typography'].map(skill => (
                       <span key={skill} className="px-3 py-1 bg-blue-500/20 border border-blue-500/50 text-blue-300 rounded-lg text-sm">
                         {skill}
                       </span>
@@ -203,12 +193,12 @@ export default function HeroLanding() {
             </div>
             
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-8">
-              <h3 className="text-2xl font-semibold text-purple-400 mb-6">Backend & AI</h3>
+              <h3 className="text-2xl font-semibold text-purple-400 mb-6">Design & Creative</h3>
               <div className="space-y-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-300 mb-2">Runtime & Servers</p>
+                  <p className="text-sm font-medium text-gray-300 mb-2">Graphic Design (Advanced)</p>
                   <div className="flex flex-wrap gap-2">
-                    {['Node.js', 'Express', 'REST APIs'].map(skill => (
+                    {['Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Canva'].map(skill => (
                       <span key={skill} className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 text-purple-300 rounded-lg text-sm">
                         {skill}
                       </span>
@@ -216,19 +206,9 @@ export default function HeroLanding() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-300 mb-2">AI & MCP</p>
+                  <p className="text-sm font-medium text-gray-300 mb-2">Graphic Specialties</p>
                   <div className="flex flex-wrap gap-2">
-                    {['MCP Server', 'Groq API', 'RAG Systems'].map(skill => (
-                      <span key={skill} className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 text-purple-300 rounded-lg text-sm">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-300 mb-2">Other Languages</p>
-                  <div className="flex flex-wrap gap-2">
-                    {['Python', 'LLMs', 'Vector Databases'].map(skill => (
+                    {['Poster Design', 'Branding', 'Visual Communication', 'Layout Design'].map(skill => (
                       <span key={skill} className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 text-purple-300 rounded-lg text-sm">
                         {skill}
                       </span>
@@ -241,9 +221,9 @@ export default function HeroLanding() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
-              <h4 className="text-lg font-semibold text-green-400 mb-4">Tools & Platforms</h4>
+              <h4 className="text-lg font-semibold text-green-400 mb-4">Soft Skills</h4>
               <div className="flex flex-wrap gap-2">
-                {['Git', 'GitHub', 'VS Code', 'npm', 'ESLint', 'TypeScript'].map(tool => (
+                {['Creativity', 'Attention to Detail', 'Visual Communication', 'Problem-solving', 'Collaborative Design'].map(tool => (
                   <span key={tool} className="px-2 py-1 text-xs bg-green-500/20 text-green-300 rounded">
                     {tool}
                   </span>
@@ -251,9 +231,9 @@ export default function HeroLanding() {
               </div>
             </div>
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
-              <h4 className="text-lg font-semibold text-orange-400 mb-4">Databases & APIs</h4>
+              <h4 className="text-lg font-semibold text-orange-400 mb-4">Certifications</h4>
               <div className="flex flex-wrap gap-2">
-                {['REST APIs', 'Vector DB', 'Upstash', 'JSONRPC'].map(tool => (
+                {['Certified HTML Developer', 'Certified CSS Developer'].map(tool => (
                   <span key={tool} className="px-2 py-1 text-xs bg-orange-500/20 text-orange-300 rounded">
                     {tool}
                   </span>
@@ -261,9 +241,9 @@ export default function HeroLanding() {
               </div>
             </div>
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
-              <h4 className="text-lg font-semibold text-pink-400 mb-4">Best Practices</h4>
+              <h4 className="text-lg font-semibold text-pink-400 mb-4">Video Editing (Beginner)</h4>
               <div className="flex flex-wrap gap-2">
-                {['Clean Code', 'Testing', 'Documentation', 'Performance'].map(practice => (
+                {['Adobe Premiere Pro', 'DaVinci Resolve', 'CapCut', 'Color Grading'].map(practice => (
                   <span key={practice} className="px-2 py-1 text-xs bg-pink-500/20 text-pink-300 rounded">
                     {practice}
                   </span>
@@ -277,43 +257,43 @@ export default function HeroLanding() {
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-12 text-center">Featured Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Digital Twin MCP Server */}
+          <h2 className="text-4xl font-bold text-white mb-12 text-center">My Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Student Management System */}
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition group">
               <div className="h-40 bg-gradient-to-br from-blue-600 to-blue-400 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">🤖</div>
+                  <div className="absolute top-2 right-2 text-4xl">📚</div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Digital Twin MCP Server</h3>
-                <p className="text-gray-400 mb-4 text-sm">An AI-powered Model Context Protocol server that answers questions about professional background using RAG and Groq API integration.</p>
+                <h3 className="text-xl font-semibold text-white mb-2">Student Management System</h3>
+                <p className="text-gray-400 mb-4 text-sm">Comprehensive system for managing student records, enrollment, grades, and academic information. Streamlined student record management for educational institutions.</p>
                 <div className="flex gap-2 flex-wrap mb-4">
-                  {['Next.js', 'MCP', 'Groq', 'RAG', 'TypeScript'].map(tag => (
+                  {['HTML', 'CSS', 'Database'].map(tag => (
                     <span key={tag} className="px-2 py-1 text-xs bg-blue-500/20 text-blue-300 rounded">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <a href="https://github.com/jedeee-ei/Digital-twin" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium">
+                <a href="https://github.com/jedeee-ei/student-management-system" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium">
                   View on GitHub <ExternalLink size={14} />
                 </a>
               </div>
             </div>
 
-            {/* Web Development Projects */}
+            {/* Scholarship Monitoring System */}
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition group">
               <div className="h-40 bg-gradient-to-br from-purple-600 to-purple-400 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">💻</div>
+                  <div className="absolute top-2 right-2 text-4xl">📊</div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Modern Web Applications</h3>
-                <p className="text-gray-400 mb-4 text-sm">Building responsive, performant web applications with React, Next.js, and Tailwind CSS. Focus on user experience and clean code architecture.</p>
+                <h3 className="text-xl font-semibold text-white mb-2">Scholarship Monitoring System</h3>
+                <p className="text-gray-400 mb-4 text-sm">End-to-end tracking of scholarship disbursements and student progress with data analytics dashboard. Provides data-driven insights for scholarship program management.</p>
                 <div className="flex gap-2 flex-wrap mb-4">
-                  {['React', 'Next.js', 'TypeScript', 'Tailwind CSS'].map(tag => (
+                  {['HTML', 'CSS', 'Database', 'Analytics'].map(tag => (
                     <span key={tag} className="px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded">
                       {tag}
                     </span>
@@ -325,95 +305,26 @@ export default function HeroLanding() {
               </div>
             </div>
 
-            {/* AI Agent Development */}
+            {/* Digital Twin Workshop */}
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition group">
               <div className="h-40 bg-gradient-to-br from-green-600 to-green-400 relative overflow-hidden">
                 <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">🧠</div>
+                  <div className="absolute top-2 right-2 text-4xl">🎓</div>
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">AI Agent Development</h3>
-                <p className="text-gray-400 mb-4 text-sm">Developing intelligent AI agents using Model Context Protocol, Groq API, and RAG systems for conversational AI experiences.</p>
+                <h3 className="text-xl font-semibold text-white mb-2">Digital Twin Workshop Platform</h3>
+                <p className="text-gray-400 mb-4 text-sm">AI-Powered RAG system for interview preparation and professional development. Helps professionals improve interview performance and career readiness.</p>
                 <div className="flex gap-2 flex-wrap mb-4">
-                  {['Python', 'Groq API', 'Vector DB', 'LLMs'].map(tag => (
+                  {['Python', 'Next.js', 'RAG', 'Groq API'].map(tag => (
                     <span key={tag} className="px-2 py-1 text-xs bg-green-500/20 text-green-300 rounded">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <button onClick={() => setShowChat(true)} className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-medium">
-                  Explore More <MessageCircle size={14} />
-                </button>
-              </div>
-            </div>
-
-            {/* Full Stack Web Development */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-orange-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-orange-600 to-orange-400 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">🔧</div>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Full Stack Solutions</h3>
-                <p className="text-gray-400 mb-4 text-sm">End-to-end development solutions including frontend interfaces, backend APIs, and database integration for complete web applications.</p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  {['Node.js', 'REST APIs', 'Database', 'Deployment'].map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-orange-500/20 text-orange-300 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button onClick={() => setShowChat(true)} className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 text-sm font-medium">
-                  View Portfolio <MessageCircle size={14} />
-                </button>
-              </div>
-            </div>
-
-            {/* UI/UX Design Implementation */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-pink-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-pink-600 to-pink-400 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">🎨</div>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">UI/UX Implementation</h3>
-                <p className="text-gray-400 mb-4 text-sm">Translating design concepts into pixel-perfect, accessible web interfaces. Creating stunning visual experiences with modern CSS techniques.</p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  {['Figma', 'CSS3', 'Accessibility', 'Responsive Design'].map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-pink-500/20 text-pink-300 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button onClick={() => setShowChat(true)} className="inline-flex items-center gap-2 text-pink-400 hover:text-pink-300 text-sm font-medium">
-                  See Designs <MessageCircle size={14} />
-                </button>
-              </div>
-            </div>
-
-            {/* Performance & Optimization */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-cyan-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-cyan-600 to-cyan-400 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">⚡</div>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Performance & Optimization</h3>
-                <p className="text-gray-400 mb-4 text-sm">Optimizing applications for speed, scalability, and efficiency. Implementing best practices for performance monitoring and improvement.</p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  {['Performance', 'SEO', 'Caching', 'Optimization'].map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-cyan-500/20 text-cyan-300 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button onClick={() => setShowChat(true)} className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium">
-                  Learn More <MessageCircle size={14} />
-                </button>
+                <a href="https://github.com/jedeee-ei/Digital-twin" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-medium">
+                  View on GitHub <ExternalLink size={14} />
+                </a>
               </div>
             </div>
           </div>
