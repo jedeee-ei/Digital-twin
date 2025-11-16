@@ -85,6 +85,25 @@ await index.query({
 
 ## Project-Specific Requirements
 
+### MCP Server Implementation
+The digital twin is now implemented as a full Model Context Protocol (MCP) server:
+
+**Entry Points:**
+- **CLI Mode**: `npm run mcp` - Starts stdio-based MCP server for Claude Desktop
+- **API Mode**: `npm run dev` then POST to `/api/mcp` - HTTP JSONRPC endpoint
+- **Server Actions**: Direct Next.js server action calls via `searchDigitalTwin()`
+
+**Available MCP Tools:**
+1. `ask_digital_twin` - Ask questions about the digital twin's profile
+2. `get_profile_summary` - Get profile summary information
+
+**MCP Server Files:**
+- `lib/mcp-server.ts` - Main MCP server with tool handlers
+- `lib/mcp-server-cli.ts` - CLI entry point for stdio transport
+- `app/api/mcp/route.ts` - HTTP API endpoint
+- `claude_desktop_config.json` - Configuration for Claude Desktop
+- `MCP_SERVER_README.md` - Comprehensive MCP setup guide
+
 ### Data Schema (digitaltwin.json)
 The profile data is stored in `digitaltwin.json` with the following structure:
 ```typescript
