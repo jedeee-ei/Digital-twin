@@ -31,7 +31,7 @@ export default function HeroLanding() {
             {/* Left Content */}
             <div className="space-y-8">
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 leading-tight whitespace-nowrap">
                   Hi, I'm <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Jhon Danver</span>
                 </h1>
                 <p className="text-xl text-gray-300">
