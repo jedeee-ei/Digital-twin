@@ -363,6 +363,70 @@ export default function HeroLanding() {
         </div>
       </section>
 
+      {/* SPUP Projects Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-12 text-center">St. Paul University Projects</h2>
+          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Contributed to critical institutional systems and student services at St. Paul University Philippines</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Instructor Login System */}
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition">
+              <div className="h-40 bg-gradient-to-br from-blue-600 to-blue-400 relative overflow-hidden flex items-center justify-center">
+                <Mail className="w-16 h-16 text-white opacity-30" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-white mb-2">Instructor Login System</h3>
+                <p className="text-gray-400 mb-4 text-sm">Secure authentication portal for instructors and faculty members. Provides credentials-based access to institutional resources and grade management.</p>
+                <div className="flex gap-2 flex-wrap">
+                  {['Authentication', 'Security', 'Credentials'].map(tag => (
+                    <span key={tag} className="px-2 py-1 text-xs bg-blue-500/20 text-blue-300 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Student Dashboard */}
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition">
+              <div className="h-40 bg-gradient-to-br from-green-600 to-green-400 relative overflow-hidden flex items-center justify-center">
+                <BarChart3 className="w-16 h-16 text-white opacity-30" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-white mb-2">Student Dashboard</h3>
+                <p className="text-gray-400 mb-4 text-sm">Comprehensive student portal displaying academic status, scholarship tracking, and application forms. Centralized hub for student information and services.</p>
+                <div className="flex gap-2 flex-wrap">
+                  {['Dashboard', 'Scholarship', 'Forms'].map(tag => (
+                    <span key={tag} className="px-2 py-1 text-xs bg-green-500/20 text-green-300 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Office of the Registrar */}
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition">
+              <div className="h-40 bg-gradient-to-br from-purple-600 to-purple-400 relative overflow-hidden flex items-center justify-center">
+                <BookOpen className="w-16 h-16 text-white opacity-30" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold text-white mb-2">Office of the Registrar Portal</h3>
+                <p className="text-gray-400 mb-4 text-sm">Official institutional portal showcasing student records management and registration services. Provides secure access to academic records and enrollment information.</p>
+                <div className="flex gap-2 flex-wrap">
+                  {['Portal', 'Records', 'Registration'].map(tag => (
+                    <span key={tag} className="px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
