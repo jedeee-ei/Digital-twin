@@ -18,6 +18,7 @@ export default function HeroLanding() {
           <div className="hidden md:flex gap-6 items-center">
             <a href="#home" className="text-gray-300 hover:text-white transition">Home</a>
             <a href="#about" className="text-gray-300 hover:text-white transition">About</a>
+            <a href="#skills" className="text-gray-300 hover:text-white transition">Skills</a>
             <a href="#projects" className="text-gray-300 hover:text-white transition">Projects</a>
             <a href="#contact" className="text-gray-300 hover:text-white transition">Contact</a>
           </div>
