@@ -292,81 +292,10 @@ export default function HeroLanding() {
         </div>
       </section>
 
-      {/* Projects Section */}
+      {/* Projects Section - St. Paul University */}
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-12 text-center">My Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Student Management System */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-blue-600 to-blue-400 relative overflow-hidden flex items-center justify-center">
-                <BookOpen className="w-16 h-16 text-white opacity-30" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Student Management System</h3>
-                <p className="text-gray-400 mb-4 text-sm">Comprehensive system for managing student records, enrollment, grades, and academic information. Streamlined student record management for educational institutions.</p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  {['HTML', 'CSS', 'Database'].map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-blue-500/20 text-blue-300 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <a href="https://github.com/jedeee-ei/student-management-system" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium">
-                  View on GitHub <ExternalLink size={14} />
-                </a>
-              </div>
-            </div>
-
-            {/* Scholarship Monitoring System */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-purple-600 to-purple-400 relative overflow-hidden flex items-center justify-center">
-                <BarChart3 className="w-16 h-16 text-white opacity-30" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Scholarship Monitoring System</h3>
-                <p className="text-gray-400 mb-4 text-sm">End-to-end tracking of scholarship disbursements and student progress with data analytics dashboard. Provides data-driven insights for scholarship program management.</p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  {['HTML', 'CSS', 'Database', 'Analytics'].map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <button onClick={() => setShowChat(true)} className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm font-medium">
-                  Learn More <MessageCircle size={14} />
-                </button>
-              </div>
-            </div>
-
-            {/* Digital Twin Workshop */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-green-600 to-green-400 relative overflow-hidden flex items-center justify-center">
-                <Zap className="w-16 h-16 text-white opacity-30" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-white mb-2">Digital Twin Workshop Platform</h3>
-                <p className="text-gray-400 mb-4 text-sm">AI-Powered RAG system for interview preparation and professional development. Helps professionals improve interview performance and career readiness.</p>
-                <div className="flex gap-2 flex-wrap mb-4">
-                  {['Python', 'Next.js', 'RAG', 'Groq API'].map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-green-500/20 text-green-300 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <a href="https://github.com/jedeee-ei/Digital-twin" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 text-sm font-medium">
-                  View on GitHub <ExternalLink size={14} />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SPUP Projects Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-12 text-center">St. Paul University Projects</h2>
+          <h2 className="text-4xl font-bold text-white mb-12 text-center">Projects</h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">Contributed to critical institutional systems and student services at St. Paul University Philippines</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
