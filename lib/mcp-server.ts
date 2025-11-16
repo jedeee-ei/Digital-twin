@@ -146,8 +146,9 @@ export function createDigitalTwinServer() {
   })
 
   // Handle tool calls
-  server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    const { name, arguments: args } = request
+  server.setRequestHandler(CallToolRequestSchema, async (request: any) => {
+    const { params } = request
+    const { name, arguments: args } = params
 
     if (name === 'ask_digital_twin') {
       try {

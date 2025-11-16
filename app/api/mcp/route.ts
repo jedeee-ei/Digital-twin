@@ -1,10 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import {
-  StdioServerTransport,
-  ServerRequest,
-  ServerResponse,
-} from '@modelcontextprotocol/sdk/server/stdio.js'
-import { JSONRPCMessage } from '@modelcontextprotocol/sdk/types.js'
 import { createDigitalTwinServer } from '@/lib/mcp-server'
 
 let server: any = null
@@ -17,7 +11,7 @@ async function initializeServer() {
   return server
 }
 
-// Handle stdio transport for local connections
+// Handle GET request for health check
 export async function GET(request: NextRequest) {
   return NextResponse.json({
     status: 'Digital Twin MCP Server is running',
@@ -45,7 +39,7 @@ export async function POST(request: NextRequest) {
     if (body.jsonrpc === '2.0') {
       const { method, params, id } = body
 
-      // Route to appropriate handler
+      // Handle ListToolsRequest
       if (method === 'tools/list') {
         const result = await mcpServer.requestHandler({
           method: 'tools/list',
@@ -57,6 +51,7 @@ export async function POST(request: NextRequest) {
         })
       }
 
+      // Handle CallToolRequest
       if (method === 'tools/call') {
         const result = await mcpServer.requestHandler({
           method: 'tools/call',
@@ -69,6 +64,7 @@ export async function POST(request: NextRequest) {
         })
       }
 
+      // Unknown method
       return NextResponse.json(
         {
           jsonrpc: '2.0',
@@ -79,8 +75,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Invalid request
     return NextResponse.json(
-      { error: 'Invalid request' },
+      { error: 'Invalid request: must be JSONRPC 2.0' },
       { status: 400 }
     )
   } catch (error) {
