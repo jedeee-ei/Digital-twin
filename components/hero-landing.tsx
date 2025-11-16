@@ -335,27 +335,108 @@ export default function HeroLanding() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-white mb-6">Let's Work Together</h2>
-          <p className="text-xl text-gray-400 mb-8">
-            Have a project in mind? Want to collaborate? Feel free to reach out!
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <a
-              href="mailto:jhonabogado@spup.edu.ph"
-              className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold rounded-lg transition transform hover:scale-105"
-            >
-              Email Me
-            </a>
-            <a
-              href="https://www.linkedin.com/in/jhon-danver-abogado-abb196396/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 border border-gray-600 text-gray-300 hover:text-white hover:border-white font-semibold rounded-lg transition"
-            >
-              LinkedIn
-            </a>
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left Column - Contact Info */}
+            <div>
+              <h2 className="text-4xl font-bold text-white mb-4">Let's Connect</h2>
+              <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+                I'm always excited to discuss AI projects, robotics innovations, or potential collaborations. Whether you're looking for an AI developer, data analyst, or just want to chat about technology, feel free to reach out!
+              </p>
+
+              <div className="space-y-4">
+                {/* Email */}
+                <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg p-4 backdrop-blur-sm hover:border-purple-500/50 transition">
+                  <div className="flex items-start gap-4">
+                    <Mail className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">Email</h3>
+                      <a href="mailto:jhonabogado@spup.edu.ph" className="text-gray-300 hover:text-purple-400 transition">
+                        jhonabogado@spup.edu.ph
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* LinkedIn */}
+                <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg p-4 backdrop-blur-sm hover:border-purple-500/50 transition">
+                  <div className="flex items-start gap-4">
+                    <Linkedin className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">LinkedIn</h3>
+                      <a href="https://www.linkedin.com/in/jhon-danver-abogado-abb196396/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition flex items-center gap-2">
+                        www.linkedin.com/in/jhon-danver-abogado <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* GitHub */}
+                <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg p-4 backdrop-blur-sm hover:border-purple-500/50 transition">
+                  <div className="flex items-start gap-4">
+                    <Github className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="font-semibold text-white mb-1">GitHub</h3>
+                      <a href="https://github.com/jedeee-ei" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition flex items-center gap-2">
+                        github.com/jedeee-ei <ExternalLink size={14} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Contact Form */}
+            <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-xl p-8 backdrop-blur-md">
+              <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 focus:bg-slate-800 transition"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                    <input
+                      type="email"
+                      placeholder="your.email@example.com"
+                      className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 focus:bg-slate-800 transition"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                  <input
+                    type="text"
+                    placeholder="What's this about?"
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 focus:bg-slate-800 transition"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                  <textarea
+                    placeholder="Tell me about your project or opportunity..."
+                    rows={5}
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/50 focus:bg-slate-800 transition resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition transform hover:scale-105 flex items-center justify-center gap-2"
+                >
+                  <Mail size={18} />
+                  Send Message
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
