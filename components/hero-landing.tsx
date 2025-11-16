@@ -101,32 +101,61 @@ export default function HeroLanding() {
               </div>
             </div>
 
-            {/* Right Side - Feature Cards */}
-            <div className="space-y-4">
-              <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-blue-500/50 transition">
-                <Palette className="w-8 h-8 mb-3 text-blue-400" />
-                <h3 className="text-xl font-semibold text-white mb-2">Web Design Expert</h3>
-                <p className="text-gray-400">Certified in HTML and CSS with 2 years of expertise in responsive web design and UI/UX</p>
-              </div>
+            {/* Right Side - Profile Image */}
+            <div className="flex justify-center">
+              <div className="relative w-80 h-96">
+                {/* Background Glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl opacity-30 blur-2xl"></div>
+                
+                {/* Image Container */}
+                <div className="relative w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-1 overflow-hidden">
+                  <img
+                    src="/profile.jpg"
+                    alt="Jhon Danver"
+                    className="w-full h-full object-cover rounded-3xl"
+                  />
+                  
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-40 rounded-3xl"></div>
+                </div>
 
-              <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-purple-500/50 transition">
-                <Brush className="w-8 h-8 mb-3 text-purple-400" />
-                <h3 className="text-xl font-semibold text-white mb-2">Graphic Designer</h3>
-                <p className="text-gray-400">Creative visual design specializing in poster design, branding, and visual communication</p>
-              </div>
-
-              <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-green-500/50 transition">
-                <Wrench className="w-8 h-8 mb-3 text-green-400" />
-                <h3 className="text-xl font-semibold text-white mb-2">System Builder</h3>
-                <p className="text-gray-400">Designing and developing comprehensive management and analytics systems</p>
+                {/* Badge */}
+                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg">
+                  Web Developer & Designer
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
+      {/* Features Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-blue-500/50 transition">
+              <Palette className="w-8 h-8 mb-3 text-blue-400" />
+              <h3 className="text-xl font-semibold text-white mb-2">Web Design Expert</h3>
+              <p className="text-gray-400">Certified in HTML and CSS with 2 years of expertise in responsive web design and UI/UX</p>
+            </div>
+
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-purple-500/50 transition">
+              <Brush className="w-8 h-8 mb-3 text-purple-400" />
+              <h3 className="text-xl font-semibold text-white mb-2">Graphic Designer</h3>
+              <p className="text-gray-400">Creative visual design specializing in poster design, branding, and visual communication</p>
+            </div>
+
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-green-500/50 transition">
+              <Wrench className="w-8 h-8 mb-3 text-green-400" />
+              <h3 className="text-xl font-semibold text-white mb-2">System Builder</h3>
+              <p className="text-gray-400">Designing and developing comprehensive management and analytics systems</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-white mb-12 text-center">About Me</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
