@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MessageCircle, X, Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
+import { MessageCircle, X, Github, Linkedin, Mail, ExternalLink, Palette, Brush, Wrench, BookOpen, BarChart3, Zap, Code2, Layers, Award, Video } from 'lucide-react'
 import DigitalTwinChat from './digital-twin-chat'
 
 export default function HeroLanding() {
@@ -104,19 +104,19 @@ export default function HeroLanding() {
             {/* Right Side - Feature Cards */}
             <div className="space-y-4">
               <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-blue-500/50 transition">
-                <div className="text-3xl mb-3">🎨</div>
+                <Palette className="w-8 h-8 mb-3 text-blue-400" />
                 <h3 className="text-xl font-semibold text-white mb-2">Web Design Expert</h3>
                 <p className="text-gray-400">Certified in HTML and CSS with 2 years of expertise in responsive web design and UI/UX</p>
               </div>
 
               <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-purple-500/50 transition">
-                <div className="text-3xl mb-3">🎭</div>
+                <Brush className="w-8 h-8 mb-3 text-purple-400" />
                 <h3 className="text-xl font-semibold text-white mb-2">Graphic Designer</h3>
                 <p className="text-gray-400">Creative visual design specializing in poster design, branding, and visual communication</p>
               </div>
 
               <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-green-500/50 transition">
-                <div className="text-3xl mb-3">💼</div>
+                <Wrench className="w-8 h-8 mb-3 text-green-400" />
                 <h3 className="text-xl font-semibold text-white mb-2">System Builder</h3>
                 <p className="text-gray-400">Designing and developing comprehensive management and analytics systems</p>
               </div>
@@ -221,7 +221,10 @@ export default function HeroLanding() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
-              <h4 className="text-lg font-semibold text-green-400 mb-4">Soft Skills</h4>
+              <div className="flex items-center gap-2 mb-4">
+                <Award className="w-6 h-6 text-green-400" />
+                <h4 className="text-lg font-semibold text-green-400">Soft Skills</h4>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {['Creativity', 'Attention to Detail', 'Visual Communication', 'Problem-solving', 'Collaborative Design'].map(tool => (
                   <span key={tool} className="px-2 py-1 text-xs bg-green-500/20 text-green-300 rounded">
@@ -231,7 +234,10 @@ export default function HeroLanding() {
               </div>
             </div>
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
-              <h4 className="text-lg font-semibold text-orange-400 mb-4">Certifications</h4>
+              <div className="flex items-center gap-2 mb-4">
+                <Award className="w-6 h-6 text-orange-400" />
+                <h4 className="text-lg font-semibold text-orange-400">Certifications</h4>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {['Certified HTML Developer', 'Certified CSS Developer'].map(tool => (
                   <span key={tool} className="px-2 py-1 text-xs bg-orange-500/20 text-orange-300 rounded">
@@ -241,7 +247,10 @@ export default function HeroLanding() {
               </div>
             </div>
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6">
-              <h4 className="text-lg font-semibold text-pink-400 mb-4">Video Editing (Beginner)</h4>
+              <div className="flex items-center gap-2 mb-4">
+                <Video className="w-6 h-6 text-pink-400" />
+                <h4 className="text-lg font-semibold text-pink-400">Video Editing (Beginner)</h4>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {['Adobe Premiere Pro', 'DaVinci Resolve', 'CapCut', 'Color Grading'].map(practice => (
                   <span key={practice} className="px-2 py-1 text-xs bg-pink-500/20 text-pink-300 rounded">
@@ -261,10 +270,8 @@ export default function HeroLanding() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Student Management System */}
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-blue-600 to-blue-400 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">📚</div>
-                </div>
+              <div className="h-40 bg-gradient-to-br from-blue-600 to-blue-400 relative overflow-hidden flex items-center justify-center">
+                <BookOpen className="w-16 h-16 text-white opacity-30" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Student Management System</h3>
@@ -284,10 +291,8 @@ export default function HeroLanding() {
 
             {/* Scholarship Monitoring System */}
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-purple-600 to-purple-400 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">📊</div>
-                </div>
+              <div className="h-40 bg-gradient-to-br from-purple-600 to-purple-400 relative overflow-hidden flex items-center justify-center">
+                <BarChart3 className="w-16 h-16 text-white opacity-30" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Scholarship Monitoring System</h3>
@@ -307,10 +312,8 @@ export default function HeroLanding() {
 
             {/* Digital Twin Workshop */}
             <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition group">
-              <div className="h-40 bg-gradient-to-br from-green-600 to-green-400 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute top-2 right-2 text-4xl">🎓</div>
-                </div>
+              <div className="h-40 bg-gradient-to-br from-green-600 to-green-400 relative overflow-hidden flex items-center justify-center">
+                <Zap className="w-16 h-16 text-white opacity-30" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Digital Twin Workshop Platform</h3>
