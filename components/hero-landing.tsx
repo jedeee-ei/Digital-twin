@@ -371,9 +371,9 @@ export default function HeroLanding() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Instructor Login System */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition">
-              <div className="h-40 bg-gradient-to-br from-blue-600 to-blue-400 relative overflow-hidden flex items-center justify-center">
-                <Mail className="w-16 h-16 text-white opacity-30" />
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition group">
+              <div className="h-48 bg-gray-900 overflow-hidden relative">
+                <img src="/spup-instructor-login.jpg" alt="Instructor Login System" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Instructor Login System</h3>
@@ -389,9 +389,9 @@ export default function HeroLanding() {
             </div>
 
             {/* Student Dashboard */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition">
-              <div className="h-40 bg-gradient-to-br from-green-600 to-green-400 relative overflow-hidden flex items-center justify-center">
-                <BarChart3 className="w-16 h-16 text-white opacity-30" />
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition group">
+              <div className="h-48 bg-gray-900 overflow-hidden relative">
+                <img src="/spup-student-dashboard.jpg" alt="Student Dashboard" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Student Dashboard</h3>
@@ -407,9 +407,9 @@ export default function HeroLanding() {
             </div>
 
             {/* Office of the Registrar */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition">
-              <div className="h-40 bg-gradient-to-br from-purple-600 to-purple-400 relative overflow-hidden flex items-center justify-center">
-                <BookOpen className="w-16 h-16 text-white opacity-30" />
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition group">
+              <div className="h-48 bg-gray-900 overflow-hidden relative">
+                <img src="/spup-registrar-portal.jpg" alt="Office of the Registrar Portal" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Office of the Registrar Portal</h3>
