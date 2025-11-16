@@ -237,7 +237,7 @@ export default function HeroLanding() {
 
       {/* Chat Modal */}
       {showChat && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end md:items-center justify-end md:justify-center p-4">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end justify-end p-4">
           <div className="w-full md:w-96 h-[600px] md:h-[700px] bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 flex flex-col overflow-hidden">
             {/* Chat Header */}
             <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 flex justify-between items-center">
