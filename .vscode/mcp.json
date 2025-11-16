@@ -1,6 +1,14 @@
 {
+  "servers": {
+    "digital-twin-mcp": {
+      "type": "http",
+      "url": "http://localhost:3000/api/mcp",
+      "timeout": 30000,
+      "description": "Digital Twin RAG MCP Server for interview preparation"
+    }
+  },
   "mcpServers": {
-    "digital-twin": {
+    "digital-twin-cli": {
       "command": "node",
       "args": ["${workspaceFolder}/lib/mcp-server-cli.ts"],
       "env": {
@@ -10,10 +18,10 @@
         "NODE_ENV": "development"
       },
       "disabled": false,
-      "autoStart": true
+      "autoStart": false
     }
   },
-  "alwaysAllow": ["digital-twin"],
+  "alwaysAllow": ["digital-twin-mcp", "digital-twin-cli"],
   "alwaysDeny": [],
   "debugLogging": true
 }
