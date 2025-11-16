@@ -16,8 +16,8 @@ export default function HeroLanding() {
             Jhon Danver
           </div>
           <div className="hidden md:flex gap-6 items-center">
+            <a href="#home" className="text-gray-300 hover:text-white transition">Home</a>
             <a href="#about" className="text-gray-300 hover:text-white transition">About</a>
-            <a href="#skills" className="text-gray-300 hover:text-white transition">Skills</a>
             <a href="#projects" className="text-gray-300 hover:text-white transition">Projects</a>
             <a href="#contact" className="text-gray-300 hover:text-white transition">Contact</a>
           </div>
@@ -25,7 +25,7 @@ export default function HeroLanding() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -154,8 +154,8 @@ export default function HeroLanding() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+      {/* About Section */}
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-white mb-12 text-center">About Me</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
