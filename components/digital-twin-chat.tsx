@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { Send } from 'lucide-react'
 import { searchDigitalTwin } from '../app/actions/digital-twin'
 
 interface Message {
@@ -64,24 +65,16 @@ export default function DigitalTwinChat() {
   }
 
   return (
-    <div className="flex h-screen flex-col bg-gradient-to-br from-slate-950 to-slate-900">
-      {/* Header */}
-      <div className="border-b border-slate-700 bg-slate-900/50 p-6">
-        <h1 className="text-2xl font-bold text-white">Digital Twin Assistant</h1>
-        <p className="mt-1 text-sm text-slate-400">
-          Ask questions about my professional background, skills, and experience
-        </p>
-      </div>
-
+    <div className="flex h-full flex-col bg-gradient-to-br from-slate-950 to-slate-900">
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
           <div className="flex h-full items-center justify-center">
-            <div className="text-center">
-              <h2 className="mb-4 text-2xl font-semibold text-slate-200">
+            <div className="text-center px-4">
+              <h2 className="mb-2 text-lg font-semibold text-slate-200">
                 Welcome to Your Digital Twin
               </h2>
-              <p className="text-slate-400">
+              <p className="text-xs text-slate-400">
                 Ask me anything about my professional profile
               </p>
             </div>
@@ -91,20 +84,20 @@ export default function DigitalTwinChat() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`mb-6 flex ${
+            className={`flex ${
               message.type === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
             <div
-              className={`max-w-md rounded-lg p-4 ${
+              className={`max-w-xs rounded-lg p-3 ${
                 message.type === 'user'
                   ? 'bg-blue-600 text-white'
                   : 'bg-slate-800 text-slate-100'
               }`}
             >
-              <p className="whitespace-pre-wrap">{message.content}</p>
+              <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
               {message.context && message.context.length > 0 && (
-                <div className="mt-3 border-t border-slate-700 pt-2 text-xs text-slate-400">
+                <div className="mt-2 border-t border-slate-700 pt-2 text-xs text-slate-400">
                   <p className="mb-1 font-semibold">Sources:</p>
                   {message.context.map((ctx, i) => (
                     <p key={i}>
@@ -118,8 +111,8 @@ export default function DigitalTwinChat() {
         ))}
 
         {loading && (
-          <div className="mb-6 flex justify-start">
-            <div className="rounded-lg bg-slate-800 p-4 text-slate-100">
+          <div className="flex justify-start">
+            <div className="rounded-lg bg-slate-800 p-3">
               <div className="flex space-x-2">
                 <div className="h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
                 <div className="animation-delay-200 h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
@@ -133,22 +126,23 @@ export default function DigitalTwinChat() {
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-slate-700 bg-slate-900/50 p-6">
-        <form onSubmit={handleSubmit} className="flex gap-2">
+      <div className="border-t border-slate-700 bg-slate-900/80 p-3">
+        <form onSubmit={handleSubmit} className="flex gap-2 items-center">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask about my background, skills, projects..."
+            placeholder="Ask about my background..."
             disabled={loading}
-            className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+            className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white transition"
+            aria-label="Send message"
           >
-            Send
+            <Send size={18} />
           </button>
         </form>
       </div>
