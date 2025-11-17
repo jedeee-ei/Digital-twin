@@ -65,16 +65,17 @@ export default function DigitalTwinChat() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-gradient-to-br from-slate-950 to-slate-900">
+    <div className="flex h-full flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Messages Container */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
         {messages.length === 0 && (
           <div className="flex h-full items-center justify-center">
             <div className="text-center px-4">
-              <h2 className="mb-2 text-lg font-semibold text-slate-200">
+              <div className="mb-3 text-4xl">💬</div>
+              <h2 className="mb-2 text-xl font-bold text-white">
                 Welcome to Your Digital Twin
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-sm text-slate-400">
                 Ask me anything about my professional profile
               </p>
             </div>
@@ -84,24 +85,24 @@ export default function DigitalTwinChat() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${
+            className={`flex animate-fade-in ${
               message.type === 'user' ? 'justify-end' : 'justify-start'
             }`}
           >
             <div
-              className={`max-w-xs rounded-lg p-3 ${
+              className={`max-w-sm rounded-2xl px-4 py-2.5 shadow-md ${
                 message.type === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-slate-800 text-slate-100'
+                  ? 'bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-br-none'
+                  : 'bg-slate-800/80 text-slate-100 rounded-bl-none border border-slate-700/50'
               }`}
             >
               <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
               {message.context && message.context.length > 0 && (
-                <div className="mt-2 border-t border-slate-700 pt-2 text-xs text-slate-400">
-                  <p className="mb-1 font-semibold">Sources:</p>
-                  {message.context.map((ctx, i) => (
-                    <p key={i}>
-                      • {ctx.title} (relevance: {(ctx.score * 100).toFixed(0)}%)
+                <div className="mt-2 border-t border-slate-600/30 pt-2 text-xs text-slate-300">
+                  <p className="mb-1 font-semibold opacity-75">Answered with AI</p>
+                  {message.context.slice(0, 2).map((ctx, i) => (
+                    <p key={i} className="opacity-60">
+                      • {ctx.title}
                     </p>
                   ))}
                 </div>
@@ -112,7 +113,7 @@ export default function DigitalTwinChat() {
 
         {loading && (
           <div className="flex justify-start">
-            <div className="rounded-lg bg-slate-800 p-3">
+            <div className="rounded-2xl bg-slate-800/80 p-3 rounded-bl-none border border-slate-700/50">
               <div className="flex space-x-2">
                 <div className="h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
                 <div className="animation-delay-200 h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
@@ -126,7 +127,7 @@ export default function DigitalTwinChat() {
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-slate-700 bg-slate-900/80 p-3">
+      <div className="border-t border-slate-700/50 bg-gradient-to-t from-slate-950 to-slate-900/50 p-3.5">
         <form onSubmit={handleSubmit} className="flex gap-2 items-center">
           <input
             type="text"
@@ -134,12 +135,12 @@ export default function DigitalTwinChat() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about my background..."
             disabled={loading}
-            className="flex-1 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none"
+            className="flex-1 rounded-full border border-slate-700 bg-slate-800/60 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/50 transition"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="p-2 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white transition"
+            className="p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 text-white transition transform hover:scale-105 shadow-lg"
             aria-label="Send message"
           >
             <Send size={18} />

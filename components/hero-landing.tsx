@@ -480,25 +480,30 @@ export default function HeroLanding() {
 
       {/* Chat Modal */}
       {showChat && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end justify-end p-4">
-          <div className="w-full md:w-80 h-[500px] md:h-[550px] bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 flex flex-col overflow-hidden">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-md md:max-w-lg h-[600px] md:h-[650px] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 flex flex-col overflow-hidden hover:border-slate-600/50 transition">
             {/* Chat Header */}
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 flex justify-between items-center">
-              <div>
-                <h3 className="font-semibold text-white">Virtual Jhon Danver</h3>
-                <p className="text-sm text-blue-100">Ask me anything about my background</p>
+            <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-5 flex justify-between items-center shadow-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                  <MessageCircle size={20} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg">Virtual Jhon Danver</h3>
+                  <p className="text-sm text-blue-100">Ask me anything about my background</p>
+                </div>
               </div>
               <button
                 onClick={() => setShowChat(false)}
-                className="p-2 hover:bg-white/20 rounded-lg transition"
+                className="p-2 hover:bg-white/20 rounded-lg transition transform hover:scale-110"
                 aria-label="Close chat"
               >
-                <X size={24} />
+                <X size={24} className="text-white" />
               </button>
             </div>
 
             {/* Chat Content */}
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1 overflow-hidden bg-gradient-to-b from-slate-900/50 to-slate-950/50">
               <DigitalTwinChat />
             </div>
           </div>
