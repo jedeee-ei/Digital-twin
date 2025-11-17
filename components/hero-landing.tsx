@@ -301,9 +301,10 @@ export default function HeroLanding() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Instructor Login System */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition group">
-              <div className="h-48 bg-gray-900 overflow-hidden relative">
-                <img src="/spup-instructor-login.jpg" alt="Instructor Login System" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-blue-500/50 transition group shadow-lg hover:shadow-xl hover:shadow-blue-500/10">
+              <div className="h-48 bg-gradient-to-br from-blue-900 to-gray-900 overflow-hidden relative">
+                <img src="/spup-instructor-login.jpg" alt="Instructor Login System" className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-40 transition duration-300"></div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Instructor Login System</h3>
@@ -319,9 +320,10 @@ export default function HeroLanding() {
             </div>
 
             {/* Student Dashboard */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition group">
-              <div className="h-48 bg-gray-900 overflow-hidden relative">
-                <img src="/spup-student-dashboard.jpg" alt="Student Dashboard" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-green-500/50 transition group shadow-lg hover:shadow-xl hover:shadow-green-500/10">
+              <div className="h-48 bg-gradient-to-br from-green-900 to-gray-900 overflow-hidden relative">
+                <img src="/spup-student-dashboard.jpg" alt="Student Dashboard" className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-40 transition duration-300"></div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Student Dashboard</h3>
@@ -337,9 +339,10 @@ export default function HeroLanding() {
             </div>
 
             {/* Office of the Registrar */}
-            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition group">
-              <div className="h-48 bg-gray-900 overflow-hidden relative">
-                <img src="/spup-registrar-portal.jpg" alt="Office of the Registrar Portal" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+            <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-purple-500/50 transition group shadow-lg hover:shadow-xl hover:shadow-purple-500/10">
+              <div className="h-48 bg-gradient-to-br from-purple-900 to-gray-900 overflow-hidden relative">
+                <img src="/spup-registrar-portal.jpg" alt="Office of the Registrar Portal" className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-40 transition duration-300"></div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-white mb-2">Office of the Registrar Portal</h3>
