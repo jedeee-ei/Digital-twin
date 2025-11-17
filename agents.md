@@ -21,7 +21,7 @@ UPSTASH_VECTOR_REST_URL=https://your-workspace-vector.upstash.io
 UPSTASH_VECTOR_REST_TOKEN=your_upstash_vector_token_here
 
 # Groq API Configuration
-GROQ_API_KEY=your_groq_api_key_here
+GROQ_API_KEY=y  our_groq_api_key_here
 
 # Upstash Redis Configuration (Optional - for future caching)
 UPSTASH_REDIS_REST_URL=https://your-workspace-redis-rest.upstash.io
