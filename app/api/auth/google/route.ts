@@ -9,14 +9,12 @@ export async function GET(request: NextRequest) {
     const action = searchParams.get('action')
 
     if (action === 'signin') {
-      // Construct redirect URI dynamically based on request origin
+      // Construct redirect URI based on request origin
       const origin = request.nextUrl.origin
       const REDIRECT_URI = `${origin}/api/auth/google/callback`
       
-      // Get from env if available, otherwise use constructed one
-      const finalRedirectUri = process.env.GOOGLE_REDIRECT_URI || REDIRECT_URI
-      
-      console.log('OAuth Signin - Using redirect URI:', finalRedirectUri)
+      console.log('OAuth Signin - Origin:', origin)
+      console.log('OAuth Signin - Redirect URI:', REDIRECT_URI)
       
       // Generate a random state for security
       const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
@@ -24,7 +22,7 @@ export async function GET(request: NextRequest) {
       // Build the Google OAuth URL with all required parameters
       const params = new URLSearchParams({
         client_id: CLIENT_ID,
-        redirect_uri: finalRedirectUri,
+        redirect_uri: REDIRECT_URI,
         response_type: 'code',
         scope: 'openid profile email',
         state: state,
@@ -33,6 +31,8 @@ export async function GET(request: NextRequest) {
       })
       
       const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`
+      
+      console.log('OAuth Signin - Redirecting to Google')
       
       // Create response and store state in cookie
       const response = NextResponse.redirect(googleAuthUrl)

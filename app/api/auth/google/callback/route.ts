@@ -36,12 +36,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(`${request.nextUrl.origin}?error=config_error`)
     }
 
-    // Construct redirect URI
+    // Construct redirect URI based on request origin
     const origin = request.nextUrl.origin
     const REDIRECT_URI = `${origin}/api/auth/google/callback`
-    const finalRedirectUri = process.env.GOOGLE_REDIRECT_URI || REDIRECT_URI
 
-    console.log('Token exchange - Using redirect URI:', finalRedirectUri)
+    console.log('Token exchange - Origin:', origin)
+    console.log('Token exchange - Redirect URI:', REDIRECT_URI)
 
     // Exchange code for token
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
         client_secret: CLIENT_SECRET,
         code,
         grant_type: 'authorization_code',
-        redirect_uri: finalRedirectUri,
+        redirect_uri: REDIRECT_URI,
       }).toString(),
     })
 
