@@ -50,6 +50,24 @@ export default function HeroLanding() {
   const [editingProjectId, setEditingProjectId] = useState<number | null>(null)
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null)
 
+  // Check if user is logged in via Google OAuth on component mount
+  useEffect(() => {
+    const checkGoogleAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/check')
+        const data = await response.json()
+        if (data.isLoggedIn && data.user) {
+          setIsLoggedIn(true)
+          setEmail(data.user.email)
+          setShowLogin(false)
+        }
+      } catch (error) {
+        console.log('Auth check failed:', error)
+      }
+    }
+    checkGoogleAuth()
+  }, [])
+
   const handleDeleteProject = (id: number) => {
     setProjects(projects.filter(project => project.id !== id))
     setDeleteConfirmId(null)
@@ -464,9 +482,9 @@ export default function HeroLanding() {
     }
   }
 
-  // Handle Google Sign In - Redirect to Google login
+  // Handle Google Sign In - OAuth flow
   const handleGoogleSignIn = () => {
-    window.open('https://accounts.google.com/signin', '_blank')
+    window.location.href = '/api/auth/google?action=signin'
   }
 
   return (
@@ -623,7 +641,12 @@ export default function HeroLanding() {
                 Cancel
               </button>
               <button
-                onClick={() => {
+                onClick={async () => {
+                  try {
+                    await fetch('/api/auth/logout', { method: 'POST' })
+                  } catch (error) {
+                    console.error('Logout API call failed:', error)
+                  }
                   setIsLoggedIn(false)
                   setShowLogoutConfirm(false)
                   setShowChat(false)
