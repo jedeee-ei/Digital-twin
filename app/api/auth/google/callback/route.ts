@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const CLIENT_ID = '895041577466-pavq1deo456keff96f34monjke65v2k1.apps.googleusercontent.com'
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET?.trim()
 
 export async function GET(request: NextRequest) {
   try {
