@@ -5,9 +5,8 @@ export async function GET(request: NextRequest) {
     nodeEnv: process.env.NODE_ENV,
     clientIdConfigured: !!process.env.GOOGLE_CLIENT_ID,
     clientSecretConfigured: !!process.env.GOOGLE_CLIENT_SECRET,
-    redirectUriConfigured: !!process.env.GOOGLE_REDIRECT_URI,
-    redirectUri: process.env.GOOGLE_REDIRECT_URI || 'NOT SET',
     origin: request.nextUrl.origin,
+    autoDetectedRedirectUri: `${request.nextUrl.origin}/api/auth/google/callback`,
     timestamp: new Date().toISOString()
   })
 }
