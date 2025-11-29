@@ -19,23 +19,18 @@ export async function GET(request: NextRequest) {
       // Generate a random state for security
       const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       
-      // Build the Google OAuth URL with all required parameters
-      const params = new URLSearchParams({
-        client_id: CLIENT_ID,
-        redirect_uri: REDIRECT_URI,
-        response_type: 'code',
-        scope: 'openid profile email',
-        state: state,
-        access_type: 'offline',
-        prompt: 'consent'
-      })
+      // Build the Google OAuth URL with minimal required parameters
+      const googleAuthUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth')
+      googleAuthUrl.searchParams.set('client_id', CLIENT_ID)
+      googleAuthUrl.searchParams.set('redirect_uri', REDIRECT_URI)
+      googleAuthUrl.searchParams.set('response_type', 'code')
+      googleAuthUrl.searchParams.set('scope', 'openid email profile')
+      googleAuthUrl.searchParams.set('state', state)
       
-      const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`
-      
-      console.log('OAuth Signin - Redirecting to Google')
+      console.log('OAuth Signin - URL:', googleAuthUrl.toString())
       
       // Create response and store state in cookie
-      const response = NextResponse.redirect(googleAuthUrl)
+      const response = NextResponse.redirect(googleAuthUrl.toString())
       
       response.cookies.set('oauth_state', state, {
         httpOnly: true,
