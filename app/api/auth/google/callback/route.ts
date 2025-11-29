@@ -1,25 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const CLIENT_ID = '895041577466-pavq1deo456keff96f34monjke65v2k1.apps.googleusercontent.com'
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || 'your_client_secret_here'
-const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/api/auth/google/callback'
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams
-  const code = searchParams.get('code')
-  const state = searchParams.get('state')
-  const storedState = request.cookies.get('oauth_state')?.value
-
-  // Validate state parameter
-  if (!state || state !== storedState) {
-    return NextResponse.redirect(`${request.nextUrl.origin}?error=invalid_state`)
-  }
-
-  if (!code) {
-    return NextResponse.redirect(`${request.nextUrl.origin}?error=no_code`)
-  }
-
   try {
+    const searchParams = request.nextUrl.searchParams
+    const code = searchParams.get('code')
+    const state = searchParams.get('state')
+    const error = searchParams.get('error')
+    const storedState = request.cookies.get('oauth_state')?.value
+
+    // Log for debugging
+    console.log('OAuth Callback received - Error:', error, 'Code present:', !!code, 'State match:', state === storedState)
+
+    // Handle OAuth errors from Google
+    if (error) {
+      console.error('OAuth error from Google:', error)
+      return NextResponse.redirect(`${request.nextUrl.origin}?error=${error}`)
+    }
+
+    // Validate state parameter
+    if (!state || state !== storedState) {
+      console.error('State mismatch - received:', state, 'stored:', storedState)
+      return NextResponse.redirect(`${request.nextUrl.origin}?error=invalid_state`)
+    }
+
+    if (!code) {
+      console.error('No authorization code received')
+      return NextResponse.redirect(`${request.nextUrl.origin}?error=no_code`)
+    }
+
+    if (!CLIENT_SECRET) {
+      console.error('CLIENT_SECRET not configured')
+      return NextResponse.redirect(`${request.nextUrl.origin}?error=config_error`)
+    }
+
+    // Construct redirect URI
+    const origin = request.nextUrl.origin
+    const REDIRECT_URI = `${origin}/api/auth/google/callback`
+    const finalRedirectUri = process.env.GOOGLE_REDIRECT_URI || REDIRECT_URI
+
+    console.log('Token exchange - Using redirect URI:', finalRedirectUri)
+
     // Exchange code for token
     const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -31,15 +54,18 @@ export async function GET(request: NextRequest) {
         client_secret: CLIENT_SECRET,
         code,
         grant_type: 'authorization_code',
-        redirect_uri: REDIRECT_URI,
+        redirect_uri: finalRedirectUri,
       }).toString(),
     })
 
     const tokenData = await tokenResponse.json()
 
     if (!tokenData.access_token) {
+      console.error('Token exchange failed:', tokenData)
       return NextResponse.redirect(`${request.nextUrl.origin}?error=token_exchange_failed`)
     }
+
+    console.log('Token exchange successful')
 
     // Get user info from Google
     const userResponse = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -49,6 +75,13 @@ export async function GET(request: NextRequest) {
     })
 
     const userData = await userResponse.json()
+
+    if (!userData.email) {
+      console.error('Could not get user email from Google')
+      return NextResponse.redirect(`${request.nextUrl.origin}?error=no_user_email`)
+    }
+
+    console.log('User authenticated:', userData.email)
 
     // Create response that redirects back to home with login data
     const response = NextResponse.redirect(request.nextUrl.origin)
@@ -76,6 +109,6 @@ export async function GET(request: NextRequest) {
     return response
   } catch (error) {
     console.error('OAuth callback error:', error)
-    return NextResponse.redirect(`${request.nextUrl.origin}?error=callback_error`)
+    return NextResponse.redirect(`${request.nextUrl.origin}?error=callback_error&details=${error instanceof Error ? error.message : 'unknown'}`)
   }
 }

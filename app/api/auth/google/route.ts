@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const CLIENT_ID = '895041577466-pavq1deo456keff96f34monjke65v2k1.apps.googleusercontent.com'
-const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/api/auth/google/callback'
 
 // Generate OAuth URL
 export async function GET(request: NextRequest) {
@@ -10,13 +9,22 @@ export async function GET(request: NextRequest) {
     const action = searchParams.get('action')
 
     if (action === 'signin') {
+      // Construct redirect URI dynamically based on request origin
+      const origin = request.nextUrl.origin
+      const REDIRECT_URI = `${origin}/api/auth/google/callback`
+      
+      // Get from env if available, otherwise use constructed one
+      const finalRedirectUri = process.env.GOOGLE_REDIRECT_URI || REDIRECT_URI
+      
+      console.log('OAuth Signin - Using redirect URI:', finalRedirectUri)
+      
       // Generate a random state for security
       const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       
       // Build the Google OAuth URL with all required parameters
       const params = new URLSearchParams({
         client_id: CLIENT_ID,
-        redirect_uri: REDIRECT_URI,
+        redirect_uri: finalRedirectUri,
         response_type: 'code',
         scope: 'openid profile email',
         state: state,
