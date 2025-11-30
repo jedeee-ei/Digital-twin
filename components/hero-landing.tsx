@@ -1122,8 +1122,7 @@ export default function HeroLanding() {
         </div>
       </section>
 
-      {/* Projects Section - St. Paul University (Admin Only) */}
-      {userRole === 'admin' && (
+      {/* Projects Section - St. Paul University (Visible to All) */}
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center mb-12">
@@ -1173,7 +1172,8 @@ export default function HeroLanding() {
                 
                 return (
                   <div key={project.id} className={`bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden ${colors.border} transition group shadow-lg hover:shadow-xl ${colors.shadow} relative`}>
-                    {/* Edit and Delete buttons */}
+                    {/* Edit and Delete buttons (Admin Only) */}
+                    {userRole === 'admin' && (
                     <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition z-10">
                       <button
                         onClick={() => handleEditProject(project)}
@@ -1190,6 +1190,7 @@ export default function HeroLanding() {
                         <Trash2 size={16} />
                       </button>
                     </div>
+                    )}
                     
                     <div className={`h-48 bg-gradient-to-br ${colors.bg} to-gray-900 overflow-hidden relative`}>
                       <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" />
@@ -1210,7 +1211,8 @@ export default function HeroLanding() {
                 )
               })}
               
-              {/* Add Project Button */}
+              {/* Add Project Button (Admin Only) */}
+              {userRole === 'admin' && (
               <button
                 onClick={() => {
                   if (!isLoggedIn) {
@@ -1228,6 +1230,7 @@ export default function HeroLanding() {
                   <p className="text-gray-300 font-semibold text-lg">Add Project</p>
                 </div>
               </button>
+              )}
             </div>
           )}
 
@@ -1270,7 +1273,8 @@ export default function HeroLanding() {
                   })
                   .map((certificate) => (
                     <div key={certificate.id} className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-amber-500/50 transition group shadow-lg hover:shadow-xl hover:shadow-amber-500/10 relative">
-                      {/* Delete button */}
+                      {/* Delete button (Admin Only) */}
+                      {userRole === 'admin' && (
                       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition z-10 flex gap-2">
                         <button
                           onClick={() => handleEditCertificate(certificate)}
@@ -1287,6 +1291,7 @@ export default function HeroLanding() {
                           <Trash2 size={16} />
                         </button>
                       </div>
+                      )}
 
                       <div className="h-64 bg-gradient-to-br from-amber-900 to-gray-900 overflow-hidden relative">
                         <img 
@@ -1305,7 +1310,8 @@ export default function HeroLanding() {
                     </div>
                   ))}
 
-                {/* Add Certificate Button */}
+                {/* Add Certificate Button (Admin Only) */}
+                {userRole === 'admin' && (
                 <button
                   onClick={() => {
                     if (!isLoggedIn) {
@@ -1323,12 +1329,12 @@ export default function HeroLanding() {
                     <p className="text-gray-300 font-semibold text-lg">Add Certificate</p>
                   </div>
                 </button>
+                )}
               </div>
             </>
           )}
         </div>
       </section>
-      )}
 
       {/* Delete Confirmation Modal (Admin Only) */}
       {deleteConfirmId !== null && userRole === 'admin' && (
