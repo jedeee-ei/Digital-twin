@@ -42,6 +42,7 @@ export default function HeroLanding() {
   const [showAddProject, setShowAddProject] = useState(false)
   const [showLogin, setShowLogin] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [userRole, setUserRole] = useState<'admin' | 'user' | null>(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
@@ -595,9 +596,9 @@ export default function HeroLanding() {
   }
 
   // Dummy account credentials
-  const dummyCredentials = {
-    email: 'admin@example.com',
-    password: 'password123'
+  const credentials = {
+    admin: { email: 'admin@example.com', password: 'admin123' },
+    user: { email: 'user@example.com', password: 'user123' }
   }
 
   // Handle login
@@ -605,13 +606,20 @@ export default function HeroLanding() {
     e.preventDefault()
     setLoginError('')
 
-    if (email === dummyCredentials.email && password === dummyCredentials.password) {
+    if (email === credentials.admin.email && password === credentials.admin.password) {
       setIsLoggedIn(true)
+      setUserRole('admin')
+      setShowLogin(false)
+      setEmail('')
+      setPassword('')
+    } else if (email === credentials.user.email && password === credentials.user.password) {
+      setIsLoggedIn(true)
+      setUserRole('user')
       setShowLogin(false)
       setEmail('')
       setPassword('')
     } else {
-      setLoginError('Invalid email or password. Try admin@example.com / password123')
+      setLoginError('Invalid email or password. Try admin@example.com/admin123 or user@example.com/user123')
     }
   }
 
@@ -633,7 +641,7 @@ export default function HeroLanding() {
 
             {/* Header */}
             <h1 className="text-2xl font-bold text-white text-center mb-1">Welcome Back</h1>
-            <p className="text-gray-400 text-center text-sm mb-6">Sign in to access AI Chat and Projects</p>
+            <p className="text-gray-400 text-center text-sm mb-6">Sign in to access AI Chat and manage portfolio</p>
 
             {/* Login Form */}
             <form onSubmit={handleLogin} className="space-y-3 mb-4">
@@ -644,7 +652,7 @@ export default function HeroLanding() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@example.com"
+                  placeholder="Enter email"
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
                 />
               </div>
@@ -656,7 +664,7 @@ export default function HeroLanding() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="password123"
+                  placeholder="Enter password"
                   className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition"
                 />
               </div>
@@ -680,8 +688,36 @@ export default function HeroLanding() {
             {/* Divider */}
             <div className="flex items-center gap-3 mb-4">
               <div className="flex-1 h-px bg-slate-700"></div>
-              <span className="text-gray-400 text-xs">Why sign in?</span>
+              <span className="text-gray-400 text-xs">Demo Accounts</span>
               <div className="flex-1 h-px bg-slate-700"></div>
+            </div>
+
+            {/* Account Types */}
+            <div className="space-y-3 mb-6">
+              <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg p-3 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <span className="text-lg">👑</span>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-sm">Admin Account</h3>
+                    <p className="text-gray-400 text-xs leading-relaxed mt-1">Full access to portfolio, projects, and certificates management</p>
+                    <p className="text-amber-400 text-xs font-mono mt-2">admin@example.com / admin123</p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-lg p-3 backdrop-blur-sm">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <span className="text-lg">👤</span>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-sm">User Account</h3>
+                    <p className="text-gray-400 text-xs leading-relaxed mt-1">Access to chat with digital twin only</p>
+                    <p className="text-green-400 text-xs font-mono mt-2">user@example.com / user123</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Benefits */}
@@ -757,6 +793,7 @@ export default function HeroLanding() {
                     console.error('Logout API call failed:', error)
                   }
                   setIsLoggedIn(false)
+                  setUserRole(null)
                   setShowLogoutConfirm(false)
                   setShowChat(false)
                   setEmail('')
@@ -1085,7 +1122,8 @@ export default function HeroLanding() {
         </div>
       </section>
 
-      {/* Projects Section - St. Paul University */}
+      {/* Projects Section - St. Paul University (Admin Only) */}
+      {userRole === 'admin' && (
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center mb-12">
@@ -1290,9 +1328,10 @@ export default function HeroLanding() {
           )}
         </div>
       </section>
+      )}
 
-      {/* Delete Confirmation Modal */}
-      {deleteConfirmId !== null && (
+      {/* Delete Confirmation Modal (Admin Only) */}
+      {deleteConfirmId !== null && userRole === 'admin' && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-sm bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 p-8">
             <div className="text-center mb-6">
@@ -1321,8 +1360,8 @@ export default function HeroLanding() {
         </div>
       )}
 
-      {/* Delete Certificate Confirmation Modal */}
-      {deleteCertificateId !== null && (
+      {/* Delete Certificate Confirmation Modal (Admin Only) */}
+      {deleteCertificateId !== null && userRole === 'admin' && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-sm bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 p-8">
             <div className="text-center mb-6">
@@ -1351,8 +1390,8 @@ export default function HeroLanding() {
         </div>
       )}
 
-      {/* Add Project Modal */}
-      {showAddProject && (
+      {/* Add Project Modal (Admin Only) */}
+      {showAddProject && userRole === 'admin' && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-md bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 p-8">
             <div className="flex justify-between items-center mb-6">
@@ -1452,8 +1491,8 @@ export default function HeroLanding() {
         </div>
       )}
 
-      {/* Add/Edit Certificate Modal */}
-      {showAddCertificate && (
+      {/* Add/Edit Certificate Modal (Admin Only) */}
+      {showAddCertificate && userRole === 'admin' && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-md bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 p-8">
             <div className="flex justify-between items-center mb-6">
