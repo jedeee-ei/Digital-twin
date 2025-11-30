@@ -1126,17 +1126,16 @@ export default function HeroLanding() {
                 {loadingTags && <p className="text-xs text-blue-400 mt-1">Fetching repository information...</p>}
               </div>
 
-              {newProject.description && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">Description (Editable)</label>
-                  <textarea
-                    value={newProject.description}
-                    onChange={(e) => setNewProject(prev => ({ ...prev, description: e.target.value }))}
-                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-slate-800 transition resize-none text-sm leading-relaxed"
-                    rows={4}
-                  />
-                </div>
-              )}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Description (Editable)</label>
+                <textarea
+                  value={newProject.description}
+                  onChange={(e) => setNewProject(prev => ({ ...prev, description: e.target.value }))}
+                  placeholder="Enter project description..."
+                  className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-slate-800 transition resize-none text-sm leading-relaxed"
+                  rows={4}
+                />
+              </div>
 
               {newProject.tags && (
                 <div>
