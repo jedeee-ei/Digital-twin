@@ -96,7 +96,7 @@ export default function DigitalTwinChat() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-white">
+    <div className="flex h-full flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
       {/* Messages Container */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3 scroll-smooth">
         {messages.length === 0 && (
@@ -128,10 +128,10 @@ export default function DigitalTwinChat() {
               </div>
 
               {/* Greeting Text */}
-              <h2 className="mb-2 text-2xl font-bold text-gray-800">
+              <h2 className="mb-2 text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 Hi! I'm Jhon's AI assistant
               </h2>
-              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+              <p className="text-sm text-slate-400 mb-6 leading-relaxed">
                 Ask me anything about my background, skills, projects, or experience.
               </p>
 
@@ -139,25 +139,25 @@ export default function DigitalTwinChat() {
               <div className="grid grid-cols-2 gap-2 mt-6 max-w-sm">
                 <button
                   onClick={() => handleSuggestedQuestion("What are your main skills?")}
-                  className="px-3 py-2 bg-gray-100 hover:bg-blue-50 border border-gray-300 hover:border-blue-300 rounded-full text-xs text-gray-700 hover:text-blue-600 transition font-medium"
+                  className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-blue-500/50 rounded-full text-xs text-slate-300 hover:text-blue-300 transition font-medium"
                 >
                   Skills
                 </button>
                 <button
                   onClick={() => handleSuggestedQuestion("Tell me about your projects")}
-                  className="px-3 py-2 bg-gray-100 hover:bg-purple-50 border border-gray-300 hover:border-purple-300 rounded-full text-xs text-gray-700 hover:text-purple-600 transition font-medium"
+                  className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-purple-500/50 rounded-full text-xs text-slate-300 hover:text-purple-300 transition font-medium"
                 >
                   Projects
                 </button>
                 <button
                   onClick={() => handleSuggestedQuestion("What's your background?")}
-                  className="px-3 py-2 bg-gray-100 hover:bg-pink-50 border border-gray-300 hover:border-pink-300 rounded-full text-xs text-gray-700 hover:text-pink-600 transition font-medium"
+                  className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-pink-500/50 rounded-full text-xs text-slate-300 hover:text-pink-300 transition font-medium"
                 >
                   Background
                 </button>
                 <button
                   onClick={() => handleSuggestedQuestion("What services do you offer?")}
-                  className="px-3 py-2 bg-gray-100 hover:bg-green-50 border border-gray-300 hover:border-green-300 rounded-full text-xs text-gray-700 hover:text-green-600 transition font-medium"
+                  className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-green-500/50 rounded-full text-xs text-slate-300 hover:text-green-300 transition font-medium"
                 >
                   Services
                 </button>
@@ -181,13 +181,13 @@ export default function DigitalTwinChat() {
             <div
               className={`max-w-xs px-4 py-2.5 rounded-2xl ${
                 message.type === 'user'
-                  ? 'bg-blue-500 text-white rounded-br-none'
-                  : 'bg-gray-200 text-gray-900 rounded-bl-none'
+                  ? 'bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-br-none'
+                  : 'bg-slate-800/80 text-slate-100 rounded-bl-none border border-slate-700/50'
               }`}
             >
               <p className="whitespace-pre-wrap text-sm leading-relaxed">{message.content}</p>
               {message.context && message.context.length > 0 && (
-                <div className="mt-2 border-t border-gray-400/30 pt-2 text-xs text-gray-700">
+                <div className="mt-2 border-t border-slate-600/30 pt-2 text-xs text-slate-300">
                   <div className="flex items-center gap-1 mb-1 font-semibold opacity-75">
                     <Sparkles size={12} />
                     <span>Knowledge Base</span>
@@ -213,11 +213,11 @@ export default function DigitalTwinChat() {
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
               <span className="text-white text-xs font-bold">🤖</span>
             </div>
-            <div className="bg-gray-200 rounded-2xl rounded-bl-none p-3">
+            <div className="bg-slate-800/80 rounded-2xl rounded-bl-none p-3 border border-slate-700/50">
               <div className="flex space-x-2">
-                <div className="h-2 w-2 animate-bounce rounded-full bg-gray-600"></div>
-                <div className="animation-delay-200 h-2 w-2 animate-bounce rounded-full bg-gray-600"></div>
-                <div className="animation-delay-400 h-2 w-2 animate-bounce rounded-full bg-gray-600"></div>
+                <div className="h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
+                <div className="animation-delay-200 h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
+                <div className="animation-delay-400 h-2 w-2 animate-bounce rounded-full bg-blue-400"></div>
               </div>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function DigitalTwinChat() {
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-gray-200 bg-white p-4">
+      <div className="border-t border-slate-700/50 bg-gradient-to-t from-slate-950 via-slate-950 to-slate-900/50 p-4">
         <form onSubmit={handleSubmit} className="flex gap-2 items-center">
           <input
             type="text"
@@ -235,12 +235,12 @@ export default function DigitalTwinChat() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything..."
             disabled={loading}
-            className="flex-1 rounded-full border border-gray-300 bg-gray-50 hover:bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400/30 transition"
+            className="flex-1 rounded-full border border-slate-700 hover:border-slate-600 bg-slate-800/40 hover:bg-slate-800/60 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 transition"
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="p-2.5 rounded-full bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white transition transform hover:scale-110 shadow-md hover:shadow-lg"
+            className="p-2.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white transition transform hover:scale-110 shadow-lg hover:shadow-xl"
             aria-label="Send message"
           >
             <Send size={18} />
