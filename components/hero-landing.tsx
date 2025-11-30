@@ -685,26 +685,10 @@ export default function HeroLanding() {
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex-1 h-px bg-slate-700"></div>
-              <span className="text-gray-400 text-xs">Demo Accounts</span>
-              <div className="flex-1 h-px bg-slate-700"></div>
-            </div>
-
-            {/* Account Types */}
-            <div className="space-y-3 mb-6">
-              <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-lg p-3 backdrop-blur-sm">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 mt-0.5">
-                    <span className="text-lg">👤</span>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold text-sm">User Account</h3>
-                    <p className="text-green-400 text-xs font-mono mt-2">user@example.com / user123</p>
-                  </div>
-                </div>
-              </div>
+            {/* Account Credentials */}
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 mb-6 backdrop-blur-sm">
+              <p className="text-gray-300 text-xs mb-2">Demo Credentials:</p>
+              <p className="text-blue-400 text-xs font-mono">user@example.com / user123</p>
             </div>
 
             {/* Benefits */}
