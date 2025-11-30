@@ -11,15 +11,7 @@ declare global {
 }
 
 export default function HeroLanding() {
-  const [showChat, setShowChat] = useState(false)
-  const [showAddProject, setShowAddProject] = useState(false)
-  const [showLogin, setShowLogin] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loginError, setLoginError] = useState('')
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
-  const [projects, setProjects] = useState([
+  const defaultProjects = [
     {
       id: 1,
       title: 'Instructor Login System',
@@ -44,16 +36,41 @@ export default function HeroLanding() {
       tags: ['Portal', 'Records', 'Registration'],
       color: 'purple'
     }
-  ])
+  ]
+
+  const [showChat, setShowChat] = useState(false)
+  const [showAddProject, setShowAddProject] = useState(false)
+  const [showLogin, setShowLogin] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loginError, setLoginError] = useState('')
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false)
+  const [projects, setProjects] = useState(defaultProjects)
   const [newProject, setNewProject] = useState({ title: '', sourceCodeLink: '', image: '', description: '', tags: '' })
   const [loadingTags, setLoadingTags] = useState(false)
   const [editingProjectId, setEditingProjectId] = useState<number | null>(null)
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null)
 
+  // Load projects from localStorage on component mount
+  useEffect(() => {
+    const savedProjects = localStorage.getItem('projects')
+    if (savedProjects) {
+      try {
+        setProjects(JSON.parse(savedProjects))
+      } catch (error) {
+        console.log('Failed to load projects from localStorage:', error)
+        setProjects(defaultProjects)
+      }
+    }
+  }, [])
+
 
 
   const handleDeleteProject = (id: number) => {
-    setProjects(projects.filter(project => project.id !== id))
+    const updatedProjects = projects.filter(project => project.id !== id)
+    setProjects(updatedProjects)
+    localStorage.setItem('projects', JSON.stringify(updatedProjects))
     setDeleteConfirmId(null)
   }
 
@@ -209,11 +226,13 @@ export default function HeroLanding() {
     if (editingProjectId !== null) {
       // Update existing project
       const tagsArray = newProject.tags.split(',').map(tag => tag.trim()).filter(tag => tag)
-      setProjects(projects.map(p => 
+      const updatedProjects = projects.map(p => 
         p.id === editingProjectId 
           ? { ...p, image: newProject.image, description: newProject.description, tags: tagsArray.length > 0 ? tagsArray : ['Project'] }
           : p
-      ))
+      )
+      setProjects(updatedProjects)
+      localStorage.setItem('projects', JSON.stringify(updatedProjects))
       setEditingProjectId(null)
       setNewProject({ title: '', sourceCodeLink: '', image: '', description: '', tags: '' })
       setShowAddProject(false)
@@ -234,14 +253,16 @@ export default function HeroLanding() {
         projectTitle = gitlabMatch[2].replace(/\.git$/, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
       }
       
-      setProjects([...projects, {
+      const newProjects = [...projects, {
         id: projects.length + 1,
         title: projectTitle,
         description: newProject.description || 'Amazing project',
         image: newProject.image,
         tags: tagsArray.length > 0 ? tagsArray : ['Project'],
         color: randomColor
-      }])
+      }]
+      setProjects(newProjects)
+      localStorage.setItem('projects', JSON.stringify(newProjects))
       setNewProject({ title: '', sourceCodeLink: '', image: '', description: '', tags: '' })
       setShowAddProject(false)
     }
