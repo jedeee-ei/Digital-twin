@@ -1128,9 +1128,13 @@ export default function HeroLanding() {
 
               {newProject.description && (
                 <div>
-                  <div className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-gray-300 resize-none">
-                    <p className="text-sm leading-relaxed">{newProject.description}</p>
-                  </div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Description (Editable)</label>
+                  <textarea
+                    value={newProject.description}
+                    onChange={(e) => setNewProject(prev => ({ ...prev, description: e.target.value }))}
+                    className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:bg-slate-800 transition resize-none text-sm leading-relaxed"
+                    rows={4}
+                  />
                 </div>
               )}
 
