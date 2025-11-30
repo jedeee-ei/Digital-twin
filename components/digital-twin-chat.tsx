@@ -21,6 +21,41 @@ export default function DigitalTwinChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const handleSuggestedQuestion = async (question: string) => {
+    // Add user message
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      type: 'user',
+      content: question,
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setLoading(true)
+
+    try {
+      // Call server action
+      const result = await searchDigitalTwin(question)
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'assistant',
+        content: result.message,
+        context: result.context,
+      }
+
+      setMessages((prev) => [...prev, assistantMessage])
+    } catch (error) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'assistant',
+        content: `Error: ${error instanceof Error ? error.message : 'Failed to get response'}`,
+      }
+      setMessages((prev) => [...prev, errorMessage])
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     scrollToBottom()
   }, [messages])
@@ -92,37 +127,25 @@ export default function DigitalTwinChat() {
               {/* Quick Suggestions */}
               <div className="grid grid-cols-2 gap-2 mt-6 max-w-sm">
                 <button
-                  onClick={() => {
-                    setInput("What are your main skills?")
-                    document.querySelector('input')?.focus()
-                  }}
+                  onClick={() => handleSuggestedQuestion("What are your main skills?")}
                   className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-blue-500/50 rounded-lg text-xs text-slate-300 hover:text-blue-300 transition group"
                 >
                   <span className="opacity-0 group-hover:opacity-100 mr-1">→</span> Skills
                 </button>
                 <button
-                  onClick={() => {
-                    setInput("Tell me about your projects")
-                    document.querySelector('input')?.focus()
-                  }}
+                  onClick={() => handleSuggestedQuestion("Tell me about your projects")}
                   className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-purple-500/50 rounded-lg text-xs text-slate-300 hover:text-purple-300 transition group"
                 >
                   <span className="opacity-0 group-hover:opacity-100 mr-1">→</span> Projects
                 </button>
                 <button
-                  onClick={() => {
-                    setInput("What's your background?")
-                    document.querySelector('input')?.focus()
-                  }}
+                  onClick={() => handleSuggestedQuestion("What's your background?")}
                   className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-pink-500/50 rounded-lg text-xs text-slate-300 hover:text-pink-300 transition group"
                 >
                   <span className="opacity-0 group-hover:opacity-100 mr-1">→</span> Background
                 </button>
                 <button
-                  onClick={() => {
-                    setInput("What services do you offer?")
-                    document.querySelector('input')?.focus()
-                  }}
+                  onClick={() => handleSuggestedQuestion("What services do you offer?")}
                   className="px-3 py-2 bg-slate-800/50 hover:bg-slate-800 border border-slate-700/50 hover:border-green-500/50 rounded-lg text-xs text-slate-300 hover:text-green-300 transition group"
                 >
                   <span className="opacity-0 group-hover:opacity-100 mr-1">→</span> Services
