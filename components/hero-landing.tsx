@@ -694,18 +694,6 @@ export default function HeroLanding() {
 
             {/* Account Types */}
             <div className="space-y-3 mb-6">
-              <div className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-lg p-3 backdrop-blur-sm">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 mt-0.5">
-                    <span className="text-lg">👑</span>
-                  </div>
-                  <div>
-                    <h3 className="text-white font-semibold text-sm">Admin Account</h3>
-                    <p className="text-gray-400 text-xs leading-relaxed mt-1">Full access to portfolio, projects, and certificates management</p>
-                    <p className="text-amber-400 text-xs font-mono mt-2">admin@example.com / admin123</p>
-                  </div>
-                </div>
-              </div>
               <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-lg p-3 backdrop-blur-sm">
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-0.5">
@@ -713,7 +701,6 @@ export default function HeroLanding() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold text-sm">User Account</h3>
-                    <p className="text-gray-400 text-xs leading-relaxed mt-1">Access to chat with digital twin only</p>
                     <p className="text-green-400 text-xs font-mono mt-2">user@example.com / user123</p>
                   </div>
                 </div>
