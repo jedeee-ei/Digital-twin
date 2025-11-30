@@ -51,6 +51,13 @@ export default function HeroLanding() {
   const [loadingTags, setLoadingTags] = useState(false)
   const [editingProjectId, setEditingProjectId] = useState<number | null>(null)
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null)
+  const [activeTab, setActiveTab] = useState<'projects' | 'certificates'>('projects')
+  const [showAddCertificate, setShowAddCertificate] = useState(false)
+  const [newCertificate, setNewCertificate] = useState({ image: '', title: '', date: '' })
+  const [certificates, setCertificates] = useState<Array<{ id: number; image: string; title: string; date: string }>>([])
+  const [deleteCertificateId, setDeleteCertificateId] = useState<number | null>(null)
+  const [editingCertificateId, setEditingCertificateId] = useState<number | null>(null)
+  const [certificateSortOrder, setCertificateSortOrder] = useState<'newest' | 'oldest'>('newest')
 
   // Load projects from localStorage on component mount
   useEffect(() => {
@@ -63,6 +70,16 @@ export default function HeroLanding() {
         setProjects(defaultProjects)
       }
     }
+
+    const savedCertificates = localStorage.getItem('certificates')
+    if (savedCertificates) {
+      try {
+        setCertificates(JSON.parse(savedCertificates))
+      } catch (error) {
+        console.log('Failed to load certificates from localStorage:', error)
+        setCertificates([])
+      }
+    }
   }, [])
 
 
@@ -73,6 +90,104 @@ export default function HeroLanding() {
     localStorage.setItem('projects', JSON.stringify(updatedProjects))
     setDeleteConfirmId(null)
   }
+
+  const handleAddCertificate = () => {
+    if (newCertificate.image && newCertificate.title) {
+      // Check localStorage size before saving
+      const certificateData = {
+        id: certificates.length + 1,
+        image: newCertificate.image,
+        title: newCertificate.title,
+        date: newCertificate.date || new Date().toLocaleDateString()
+      }
+      
+      try {
+        const newCertificates = [...certificates, certificateData]
+        const dataToStore = JSON.stringify(newCertificates)
+        
+        // Increased to 50MB limit (most browsers support 5-50MB)
+        if (dataToStore.length > 52428800) { // 50MB limit
+          alert('Certificate storage is full. Please delete some old certificates first.')
+          return
+        }
+        
+        localStorage.setItem('certificates', dataToStore)
+        setCertificates(newCertificates)
+        setNewCertificate({ image: '', title: '', date: '' })
+        setShowAddCertificate(false)
+      } catch (e) {
+        if (e instanceof Error && e.name === 'QuotaExceededError') {
+          alert('Storage quota exceeded. Please delete some certificates first or try uploading a smaller image.')
+        } else {
+          alert('Failed to save certificate. Try with a smaller image.')
+        }
+      }
+    } else {
+      alert('Please provide both certificate image and title.')
+    }
+  }
+
+  const handleDeleteCertificate = (id: number) => {
+    const updatedCertificates = certificates.filter(cert => cert.id !== id)
+    setCertificates(updatedCertificates)
+    localStorage.setItem('certificates', JSON.stringify(updatedCertificates))
+    setDeleteCertificateId(null)
+  }
+
+  const handleEditCertificate = (certificate: { id: number; image: string; title: string; date: string }) => {
+    setEditingCertificateId(certificate.id)
+    setNewCertificate({ image: certificate.image, title: certificate.title, date: certificate.date })
+    setShowAddCertificate(true)
+  }
+
+  const handleUpdateCertificate = () => {
+    if (newCertificate.image && newCertificate.title && editingCertificateId !== null) {
+      const updatedCertificates = certificates.map(cert => 
+        cert.id === editingCertificateId 
+          ? { ...cert, image: newCertificate.image, title: newCertificate.title, date: newCertificate.date }
+          : cert
+      )
+      setCertificates(updatedCertificates)
+      localStorage.setItem('certificates', JSON.stringify(updatedCertificates))
+      setNewCertificate({ image: '', title: '', date: '' })
+      setEditingCertificateId(null)
+      setShowAddCertificate(false)
+    }
+  }
+
+  const handleCertificateImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // Limit file size to 5MB (increased from 500KB)
+      if (file.size > 5242880) {
+        alert('Image is too large. Please select an image under 5MB.')
+        return
+      }
+
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const img = new Image()
+        img.onload = () => {
+          const canvas = document.createElement('canvas')
+          const ctx = canvas.getContext('2d')
+          
+          // Reduce dimensions to 60% to better preserve quality
+          canvas.width = img.width * 0.6
+          canvas.height = img.height * 0.6
+          
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+            // Compress to JPEG quality 0.8 (improved from 0.7)
+            const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8)
+            setNewCertificate(prev => ({ ...prev, image: compressedDataUrl }))
+          }
+        }
+        img.src = event.target?.result as string
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
 
   const handleEditProject = (project: typeof projects[0]) => {
     setEditingProjectId(project.id)
@@ -426,6 +541,19 @@ export default function HeroLanding() {
                 <p style="margin: 0.01in 0 0 0; font-size: 9px; color: #555; line-height: 1.3;">Implemented secure student records management system.</p>
               </div>
             </div>
+
+            <!-- Certifications Section -->
+            ${certificates.length > 0 ? `
+              <div style="margin-bottom: 0.06in;">
+                <h3 style="margin: 0 0 0.03in 0; font-size: 13px; font-weight: bold; color: #1e5f74; border-bottom: 2px solid #d4a574; padding-bottom: 0.02in;">🏆 CERTIFICATIONS</h3>
+                ${certificates.map((cert) => `
+                  <div style="margin-bottom: 0.04in;">
+                    <p style="margin: 0; font-size: 9px; color: #555; font-weight: bold;">${cert.title}</p>
+                    ${cert.date ? `<p style="margin: 0.005in 0 0 0; font-size: 8px; color: #666;">Date: ${cert.date}</p>` : ''}
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
 
             <!-- Education -->
             <div style="margin-bottom: 0.04in;">
@@ -961,82 +1089,205 @@ export default function HeroLanding() {
       <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">Projects</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">Projects & Certificates</h2>
             <p className="text-gray-400 max-w-2xl">Contributed to critical institutional systems and student services at St. Paul University Philippines</p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {projects.map((project) => {
-              const colorMap = {
-                blue: { border: 'hover:border-blue-500/50', shadow: 'hover:shadow-blue-500/10', bg: 'from-blue-900', tags: 'bg-blue-500/20 text-blue-300' },
-                green: { border: 'hover:border-green-500/50', shadow: 'hover:shadow-green-500/10', bg: 'from-green-900', tags: 'bg-green-500/20 text-green-300' },
-                purple: { border: 'hover:border-purple-500/50', shadow: 'hover:shadow-purple-500/10', bg: 'from-purple-900', tags: 'bg-purple-500/20 text-purple-300' },
-                pink: { border: 'hover:border-pink-500/50', shadow: 'hover:shadow-pink-500/10', bg: 'from-pink-900', tags: 'bg-pink-500/20 text-pink-300' },
-                cyan: { border: 'hover:border-cyan-500/50', shadow: 'hover:shadow-cyan-500/10', bg: 'from-cyan-900', tags: 'bg-cyan-500/20 text-cyan-300' },
-                orange: { border: 'hover:border-orange-500/50', shadow: 'hover:shadow-orange-500/10', bg: 'from-orange-900', tags: 'bg-orange-500/20 text-orange-300' },
-                red: { border: 'hover:border-red-500/50', shadow: 'hover:shadow-red-500/10', bg: 'from-red-900', tags: 'bg-red-500/20 text-red-300' },
-                indigo: { border: 'hover:border-indigo-500/50', shadow: 'hover:shadow-indigo-500/10', bg: 'from-indigo-900', tags: 'bg-indigo-500/20 text-indigo-300' }
-              }
-              const colors = colorMap[project.color as keyof typeof colorMap] || colorMap.blue
-              
-              return (
-                <div key={project.id} className={`bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden ${colors.border} transition group shadow-lg hover:shadow-xl ${colors.shadow} relative`}>
-                  {/* Edit and Delete buttons */}
-                  <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition z-10">
-                    <button
-                      onClick={() => handleEditProject(project)}
-                      className="p-2 bg-slate-900/80 hover:bg-blue-600 text-gray-300 hover:text-white rounded-lg transition"
-                      title="Edit project"
-                    >
-                      <Edit2 size={16} />
-                    </button>
-                    <button
-                      onClick={() => setDeleteConfirmId(project.id)}
-                      className="p-2 bg-slate-900/80 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg transition"
-                      title="Delete project"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                  
-                  <div className={`h-48 bg-gradient-to-br ${colors.bg} to-gray-900 overflow-hidden relative`}>
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-40 transition duration-300"></div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
-                    <p className="text-gray-400 mb-4 text-sm">{project.description}</p>
-                    <div className="flex gap-2 flex-wrap">
-                      {project.tags.map(tag => (
-                        <span key={tag} className={`px-2 py-1 text-xs ${colors.tags} rounded`}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-            
-            {/* Add Project Button */}
+
+          {/* Tabs */}
+          <div className="flex gap-4 mb-8 border-b border-slate-700">
             <button
-              onClick={() => {
-                if (!isLoggedIn) {
-                  setShowLogin(true);
-                } else {
-                  setShowAddProject(true);
-                }
-              }}
-              className="bg-slate-800/50 backdrop-blur border border-dashed border-slate-600 rounded-xl overflow-hidden hover:border-slate-500 transition group shadow-lg hover:shadow-xl hover:shadow-slate-500/10 flex items-center justify-center min-h-96 cursor-pointer hover:bg-slate-800/70"
+              onClick={() => setActiveTab('projects')}
+              className={`px-6 py-3 font-semibold transition border-b-2 ${
+                activeTab === 'projects'
+                  ? 'text-blue-400 border-blue-400'
+                  : 'text-gray-400 border-transparent hover:text-gray-300'
+              }`}
             >
-              <div className="text-center">
-                <div className="w-20 h-20 bg-slate-700 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-600 transition">
-                  <Plus size={48} className="text-gray-400 group-hover:text-gray-300 transition" />
-                </div>
-                <p className="text-gray-300 font-semibold text-lg">Add Project</p>
-              </div>
+              📋 Projects
+            </button>
+            <button
+              onClick={() => setActiveTab('certificates')}
+              className={`px-6 py-3 font-semibold transition border-b-2 ${
+                activeTab === 'certificates'
+                  ? 'text-blue-400 border-blue-400'
+                  : 'text-gray-400 border-transparent hover:text-gray-300'
+              }`}
+            >
+              🏆 Certificates
             </button>
           </div>
+
+          {/* Projects Tab */}
+          {activeTab === 'projects' && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {projects.map((project) => {
+                const colorMap = {
+                  blue: { border: 'hover:border-blue-500/50', shadow: 'hover:shadow-blue-500/10', bg: 'from-blue-900', tags: 'bg-blue-500/20 text-blue-300' },
+                  green: { border: 'hover:border-green-500/50', shadow: 'hover:shadow-green-500/10', bg: 'from-green-900', tags: 'bg-green-500/20 text-green-300' },
+                  purple: { border: 'hover:border-purple-500/50', shadow: 'hover:shadow-purple-500/10', bg: 'from-purple-900', tags: 'bg-purple-500/20 text-purple-300' },
+                  pink: { border: 'hover:border-pink-500/50', shadow: 'hover:shadow-pink-500/10', bg: 'from-pink-900', tags: 'bg-pink-500/20 text-pink-300' },
+                  cyan: { border: 'hover:border-cyan-500/50', shadow: 'hover:shadow-cyan-500/10', bg: 'from-cyan-900', tags: 'bg-cyan-500/20 text-cyan-300' },
+                  orange: { border: 'hover:border-orange-500/50', shadow: 'hover:shadow-orange-500/10', bg: 'from-orange-900', tags: 'bg-orange-500/20 text-orange-300' },
+                  red: { border: 'hover:border-red-500/50', shadow: 'hover:shadow-red-500/10', bg: 'from-red-900', tags: 'bg-red-500/20 text-red-300' },
+                  indigo: { border: 'hover:border-indigo-500/50', shadow: 'hover:shadow-indigo-500/10', bg: 'from-indigo-900', tags: 'bg-indigo-500/20 text-indigo-300' }
+                }
+                const colors = colorMap[project.color as keyof typeof colorMap] || colorMap.blue
+                
+                return (
+                  <div key={project.id} className={`bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden ${colors.border} transition group shadow-lg hover:shadow-xl ${colors.shadow} relative`}>
+                    {/* Edit and Delete buttons */}
+                    <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition z-10">
+                      <button
+                        onClick={() => handleEditProject(project)}
+                        className="p-2 bg-slate-900/80 hover:bg-blue-600 text-gray-300 hover:text-white rounded-lg transition"
+                        title="Edit project"
+                      >
+                        <Edit2 size={16} />
+                      </button>
+                      <button
+                        onClick={() => setDeleteConfirmId(project.id)}
+                        className="p-2 bg-slate-900/80 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg transition"
+                        title="Delete project"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                    
+                    <div className={`h-48 bg-gradient-to-br ${colors.bg} to-gray-900 overflow-hidden relative`}>
+                      <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60 group-hover:opacity-40 transition duration-300"></div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-white mb-2">{project.title}</h3>
+                      <p className="text-gray-400 mb-4 text-sm">{project.description}</p>
+                      <div className="flex gap-2 flex-wrap">
+                        {project.tags.map(tag => (
+                          <span key={tag} className={`px-2 py-1 text-xs ${colors.tags} rounded`}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+              
+              {/* Add Project Button */}
+              <button
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    setShowLogin(true);
+                  } else {
+                    setShowAddProject(true);
+                  }
+                }}
+                className="bg-slate-800/50 backdrop-blur border border-dashed border-slate-600 rounded-xl overflow-hidden hover:border-slate-500 transition group shadow-lg hover:shadow-xl hover:shadow-slate-500/10 flex items-center justify-center min-h-96 cursor-pointer hover:bg-slate-800/70"
+              >
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-slate-700 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-600 transition">
+                    <Plus size={48} className="text-gray-400 group-hover:text-gray-300 transition" />
+                  </div>
+                  <p className="text-gray-300 font-semibold text-lg">Add Project</p>
+                </div>
+              </button>
+            </div>
+          )}
+
+          {/* Certificates Tab */}
+          {activeTab === 'certificates' && (
+            <>
+              {/* Sort Controls */}
+              <div className="mb-6 flex gap-3 items-center">
+                <span className="text-gray-400 text-sm font-medium">Sort by Date:</span>
+                <button
+                  onClick={() => setCertificateSortOrder('newest')}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${
+                    certificateSortOrder === 'newest'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700 border border-slate-700'
+                  }`}
+                >
+                  Newest First
+                </button>
+                <button
+                  onClick={() => setCertificateSortOrder('oldest')}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${
+                    certificateSortOrder === 'oldest'
+                      ? 'bg-amber-500 text-white'
+                      : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700 border border-slate-700'
+                  }`}
+                >
+                  Oldest First
+                </button>
+              </div>
+
+              {/* Certificates Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {certificates
+                  .slice()
+                  .sort((a, b) => {
+                    const dateA = a.date ? new Date(a.date).getTime() : 0
+                    const dateB = b.date ? new Date(b.date).getTime() : 0
+                    return certificateSortOrder === 'newest' ? dateB - dateA : dateA - dateB
+                  })
+                  .map((certificate) => (
+                    <div key={certificate.id} className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-amber-500/50 transition group shadow-lg hover:shadow-xl hover:shadow-amber-500/10 relative">
+                      {/* Delete button */}
+                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition z-10 flex gap-2">
+                        <button
+                          onClick={() => handleEditCertificate(certificate)}
+                          className="p-2 bg-slate-900/80 hover:bg-blue-600 text-gray-300 hover:text-white rounded-lg transition"
+                          title="Edit certificate"
+                        >
+                          <Edit2 size={16} />
+                        </button>
+                        <button
+                          onClick={() => setDeleteCertificateId(certificate.id)}
+                          className="p-2 bg-slate-900/80 hover:bg-red-600 text-gray-300 hover:text-white rounded-lg transition"
+                          title="Delete certificate"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+
+                      <div className="h-64 bg-gradient-to-br from-amber-900 to-gray-900 overflow-hidden relative">
+                        <img 
+                          src={certificate.image} 
+                          alt="Certificate" 
+                          className="w-full h-full object-cover group-hover:scale-110 transition duration-500 brightness-90 group-hover:brightness-100" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-60 group-hover:opacity-40 transition duration-300"></div>
+                      </div>
+
+                      {/* Certificate Info */}
+                      <div className="p-4 bg-slate-900/50">
+                        <h3 className="font-semibold text-white text-sm mb-1">{certificate.title}</h3>
+                        {certificate.date && <p className="text-xs text-gray-400">Earned: {certificate.date}</p>}
+                      </div>
+                    </div>
+                  ))}
+
+                {/* Add Certificate Button */}
+                <button
+                  onClick={() => {
+                    if (!isLoggedIn) {
+                      setShowLogin(true);
+                    } else {
+                      setShowAddCertificate(true);
+                    }
+                  }}
+                  className="bg-slate-800/50 backdrop-blur border border-dashed border-slate-600 rounded-xl overflow-hidden hover:border-slate-500 transition group shadow-lg hover:shadow-xl hover:shadow-slate-500/10 flex items-center justify-center min-h-64 cursor-pointer hover:bg-slate-800/70"
+                >
+                  <div className="text-center">
+                    <div className="w-20 h-20 bg-slate-700 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-slate-600 transition">
+                      <Plus size={48} className="text-gray-400 group-hover:text-gray-300 transition" />
+                    </div>
+                    <p className="text-gray-300 font-semibold text-lg">Add Certificate</p>
+                  </div>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -1061,6 +1312,36 @@ export default function HeroLanding() {
               </button>
               <button
                 onClick={() => handleDeleteProject(deleteConfirmId)}
+                className="flex-1 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition transform hover:scale-105"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Certificate Confirmation Modal */}
+      {deleteCertificateId !== null && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-sm bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 p-8">
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Trash2 className="text-red-400" size={24} />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">Delete Certificate?</h3>
+              <p className="text-gray-400">Are you sure you want to delete this certificate? This action cannot be undone.</p>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setDeleteCertificateId(null)}
+                className="flex-1 py-2 border border-gray-600 text-gray-300 hover:text-white hover:border-white font-semibold rounded-lg transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => handleDeleteCertificate(deleteCertificateId)}
                 className="flex-1 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition transform hover:scale-105"
               >
                 Delete
@@ -1161,6 +1442,94 @@ export default function HeroLanding() {
                 </button>
                 <button
                   onClick={() => setShowAddProject(false)}
+                  className="flex-1 py-2 border border-gray-600 text-gray-300 hover:text-white hover:border-white font-semibold rounded-lg transition"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Add/Edit Certificate Modal */}
+      {showAddCertificate && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 p-8">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-bold text-white">{editingCertificateId ? 'Edit Certificate' : 'Add Certificate'}</h3>
+              <button
+                onClick={() => {
+                  setShowAddCertificate(false)
+                  setNewCertificate({ image: '', title: '', date: '' })
+                  setEditingCertificateId(null)
+                }}
+                className="text-gray-400 hover:text-white transition"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Certificate Title *
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g., HTML & CSS Developer Certification"
+                  value={newCertificate.title}
+                  onChange={(e) => setNewCertificate(prev => ({ ...prev, title: e.target.value }))}
+                  className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 focus:bg-slate-800 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Date (Optional)</label>
+                <input
+                  type="date"
+                  value={newCertificate.date}
+                  onChange={(e) => setNewCertificate(prev => ({ ...prev, date: e.target.value }))}
+                  className="w-full px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-amber-500/50 focus:bg-slate-800 transition"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Certificate Image *</label>
+                <div className="flex items-center justify-center w-full">
+                  <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-slate-700 rounded-lg cursor-pointer bg-slate-800/30 hover:bg-slate-800/50 transition">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      {newCertificate.image ? (
+                        <>
+                          <img src={newCertificate.image} alt="preview" className="w-40 h-40 object-contain rounded mb-2" />
+                          <p className="text-xs text-gray-400">Click to change image</p>
+                        </>
+                      ) : (
+                        <>
+                          <Award size={48} className="text-gray-400 mb-2" />
+                          <p className="text-sm text-gray-400">Click to upload certificate image</p>
+                        </>
+                      )}
+                    </div>
+                    <input type="file" className="hidden" onChange={handleCertificateImageUpload} accept="image/*" />
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <button
+                  onClick={editingCertificateId ? handleUpdateCertificate : handleAddCertificate}
+                  disabled={!newCertificate.image || !newCertificate.title}
+                  className="flex-1 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold rounded-lg transition transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {editingCertificateId ? 'Update Certificate' : 'Add Certificate'}
+                </button>
+                <button
+                  onClick={() => {
+                    setShowAddCertificate(false)
+                    setNewCertificate({ image: '', title: '', date: '' })
+                    setEditingCertificateId(null)
+                  }}
                   className="flex-1 py-2 border border-gray-600 text-gray-300 hover:text-white hover:border-white font-semibold rounded-lg transition"
                 >
                   Cancel
@@ -1291,8 +1660,8 @@ export default function HeroLanding() {
 
       {/* Chat Modal */}
       {showChat && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-end p-4">
-          <div className="w-full max-w-md md:max-w-lg h-[600px] md:h-[650px] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 flex flex-col overflow-hidden hover:border-slate-600/50 transition">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-end p-4 animate-fade-in">
+          <div className="w-full max-w-md md:max-w-lg h-[600px] md:h-[650px] bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-2xl shadow-2xl border border-slate-700/50 flex flex-col overflow-hidden hover:border-slate-600/50 transition transform animate-slide-in-right">
             {/* Chat Header */}
             <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-5 flex justify-between items-center shadow-lg">
               <div className="flex items-center gap-3">

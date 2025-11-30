@@ -10,6 +10,7 @@
     "mcp": "tsx lib/mcp-server-cli.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0",
     "@modelcontextprotocol/sdk": "^1.22.0",
     "@upstash/vector": "^1.1.0",
     "groq-sdk": "^0.4.0",

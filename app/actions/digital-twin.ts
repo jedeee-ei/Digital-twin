@@ -99,16 +99,16 @@ export async function searchDigitalTwin(question: string) {
     // Step 3: Generate response using Groq with RAG context
     const message = await groq.chat.completions.create({
       model: 'llama-3.1-8b-instant',
-      max_tokens: 1024,
+      max_tokens: 512,
       messages: [
         {
           role: 'system',
           content:
-            'You are an AI digital twin assistant. Answer questions as if you are the person, speaking in first person about your background, skills, and experience. If the question is not directly related to your profile, still try to give a helpful response based on your background.',
+            'You are Jhon\'s AI assistant. Answer questions directly and concisely in 2-3 sentences maximum. Speak in first person as if you are Jhon. Be specific and to the point. Avoid lengthy explanations unless specifically asked. Focus on providing the most relevant information.',
         },
         {
           role: 'user',
-          content: `Based on the following information, answer the question:\n\n${context}\n\nQuestion: ${question}`,
+          content: `Based on the following information, answer the question concisely:\n\n${context}\n\nQuestion: ${question}`,
         },
       ],
     })
